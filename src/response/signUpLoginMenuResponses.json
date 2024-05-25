@@ -1,0 +1,45 @@
+{
+  "security_question": "Pick your security question: 1. What is your father’s name ? 2. What is your favourite color ? 3. What was the name of your first pet?",
+  "random_password": "Your random password is: $VAR1$\nPlease re-enter your password here:",
+  "slogan": "Your slogan is ”$VAR1$”",
+  "usercreated": "User $VAR1$ with nickname $VAR2$ successfully created.",
+  "showsecurityquestions": "Pick your security question:\n1. What is your father’s name ? \n2. What is your favourite color ?\n3. What was the name of your first pet?",
+  "securityQ1": "1. What is your father’s name ?",
+  "securityQ2": "2. What is your favourite color ?",
+  "securityQ3": "3. What was the name of your first pet?",
+  "setnewpassword": "Set your new password:",
+  "confirmnewpassword": "Confirm your new password:",
+  "randpass": "Your random password is: $VAR1$",
+  "confirmrandpass": "Please re-enter your password here:",
+
+  "successfulLogin": "Success!: User logged in successfully!",
+
+  "passChanged": "Success!: Password changed successfully",
+
+  "registerusername404": "Error!: username not provided!",
+  "registerpassword404": "Error!: password not provided!",
+  "registeremail404": "Error!: email not provided!",
+  "registerpasswordconfirm404": "Error!: password confirmation not provided!",
+  "registernickname404": "Error!: nickname not provided!",
+  "registerslogan404": "Error!: slogan not provided!",
+
+  "unmatchingpasswords": "Error!: unmatching passwords!",
+
+  "recoveryquestion404": "Error!: recovery question not provided!",
+  "invalidusername": "Error!: username's format is invalid!",
+  "usernameexists": "Error!: username already exists!",
+  "passwordweak": "Error!: provided password is weak!",
+  "emailexists": "Error!: provided email already exists!",
+  "invalidemail": "Error!: email's format is invalid!",
+  "usernotfound": "Error!: user doesn't exist",
+
+  "unmatchingpassanduser": "Error!: Username and password didn’t match!",
+
+  "loginerror": "Error!: Username and password didn’t match!",
+  "incorrectsecurityanswer": "Error!: Your answer to your security question is incorrect!",
+
+  "invalid": "Error!: Invalid command!",
+
+  "captcha": "To verify that you are not a bot, please enter the following captcha:\n$VAR1$",
+  "captchainvalid": "Error!: entered captcha was wrong!"
+}
