@@ -1,0 +1,10 @@
+{
+  "userNameChange": "^\\s*profile\\s+change\\s+(-u\\s+(?<username>\\\"[^\\\"]+\\\"|\\S+)){0,1}\\s*$",
+  "nickNameChange": "^\\s*profile\\s+change\\s+(-n\\s+(?<nickname>\\\"[^\\\"]+\\\"|\\S+)\\s*){0,1}$",
+  "passWordChange": "^\\s*profile\\s+change\\s+password\\s+((-o\\s+(?<old>\\\"[^\\\"]+\\\"|\\S+)\\s*)|(-n\\s+(?<new>\\\"[^\\\"]+\\\"|\\S+)\\s*)){0,2}$",
+  "emailChange": "^\\s*profile\\s+change\\s+(-e\\s+(?<email>\\\"[^\\\"]+\\\"|\\S+)\\s*){0,1}$",
+  "score": "^\\s*profile\\s+display\\s+highscore\\s*$",
+  "rank": "^\\s*profile\\s+display\\s+rank\\s*$",
+  "displayAll": "^\\s*show\\s+information\\s*$"
+
+}

@@ -1,0 +1,6 @@
+{
+  "logout": "^\\s*logout\\s*$",
+  "startNewGame": "^\\s*start\\s+game\\s*(?<opponent>[2345678])\\s+(?<rounds>\\d+)\\s*$",
+  "loadGame": "^\\s*load\\s+last\\s+game\\s*$",
+  "profileMenu": "^\\s*enter\\s+profile\\s+menu\\s*$"
+}

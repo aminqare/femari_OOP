@@ -31,20 +31,6 @@ public class signUpMenuController extends menuController{
         signUpMenuController.currentUser = currentUser;
     }
 
-//    public static String chooseRandomSlogan(){
-//        Random selector = new Random();
-//        String[] slogans = {
-//                "I have the high ground!",
-//                "You underestimate my powers!",
-//                "Don't try it!",
-//                "Hello there!",
-//                "This is the end for you!",
-//                "You don't know the power of the dark side!",
-//                "It is delusion to think your actions have had any consequence!",
-//                "It's a canon event!"
-//        };
-//        return slogans[selector.nextInt(slogans.length)];
-//    }
 
     public static String generateRandomString() {
         int length = 8; // minimum length of 6

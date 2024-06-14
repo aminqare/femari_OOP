@@ -1,6 +1,11 @@
 package model.components;
 
+import model.cards.cards;
+import model.specialCards.builder;
+import model.specialCards.specialCards;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class User implements Serializable {
@@ -10,6 +15,17 @@ public class User implements Serializable {
     private String email;
     private int passwordRecoveryQuestion;
     private String passwordRecoveryAnswer;
+    private ArrayList<cards> playerCards;
+    private ArrayList<specialCards> playerSpecialCards = new ArrayList<>();
+
+    public ArrayList<cards> getPlayerCards() {
+        return playerCards;
+    }
+
+    public ArrayList<specialCards> getPlayerSpecialCards() {
+        return playerSpecialCards;
+    }
+
 
     private int score;
 
