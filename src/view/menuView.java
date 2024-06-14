@@ -34,6 +34,7 @@ public class menuView {
                 String toBeReplaced = "\\$VAR" + i + "\\$";
                 response = response.replaceAll(toBeReplaced, (String) params[i - 1]);
             }
+            System.out.println(response);
 
 
         } catch (

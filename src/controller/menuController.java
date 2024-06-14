@@ -1,6 +1,7 @@
 package controller;
 
 import com.google.gson.JsonObject;
+import model.UsersDB;
 //import model.database.UsersDB;
 
 import java.util.Scanner;
