@@ -49,9 +49,6 @@ public class signUpLoginView extends menuView{
                     menuRegexPatternsObject);
 
             if (registerMatcher.find()) {
-
-
-                System.out.println("kos nane matin hashemi");
                 String username = StringParser.removeQuotes(registerMatcher.group(3));
                 String password = StringParser.removeQuotes(registerMatcher.group(5));
                 String passwordConfirmation = StringParser.removeQuotes(registerMatcher.group(6));
@@ -63,7 +60,6 @@ public class signUpLoginView extends menuView{
                 System.out.println(email);
                 System.out.println(nickname);
                 if(username == null) {
-                    System.out.println("kos nane siavash ahmadi");
                     signUpLoginView.output("registerusername404");
                     continue;
                 }
@@ -317,7 +313,7 @@ public class signUpLoginView extends menuView{
                 currentUser = UsersDB.usersDB.getUserByUsername(username);
                 setCurrentUser(currentUser);
                 signUpLoginView.output("successfulLogin");
-                //mainMenuView.run(currentUser, scanner);
+                profileMenuView.run(scanner, currentUser);
             }
             else if (loginStayLoggedInMatcher.find()) {
 
@@ -370,7 +366,7 @@ public class signUpLoginView extends menuView{
                 currentUser = UsersDB.usersDB.getUserByUsername(username);
                 setCurrentUser(currentUser);
                 signUpLoginView.output("successfulLogin");
-                //MainMenuView.run(currentUser, scanner);
+                profileMenuView.run(scanner, currentUser);
 
             }
             else if (forgotMyPassMatcher.find()) {

@@ -14,9 +14,9 @@
 //import java.util.Scanner;
 //import java.util.regex.Matcher;
 //
-//import static controller.MenuController.getJSONRegexMatcher;
+//import static controller.menuController.getJSONRegexMatcher;
 //
-//public class MainMenuView extends menuView{
+//public class mainMenuView extends menuView{
 //
 //    private static String pathToRegexJSON = "src/main/java/stronghold/database/utils/regex/MainMenuRegex.json";
 //
