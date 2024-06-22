@@ -31,6 +31,14 @@ public class User implements Serializable {
 
     private int score;
 
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
     public User(String username, String password, String nickname, String email, int passwordRecoveryQuestion, String passwordRecoveryAnswer) {
         this.username = username;
         this.password = password;
@@ -41,7 +49,7 @@ public class User implements Serializable {
         playerCards =new ArrayList<>();
         playerSpecialCards = new ArrayList<>();
         this.gold=80;
-        this.level=1;
+        this.level=0;
     }
 
     public String getUsername() {

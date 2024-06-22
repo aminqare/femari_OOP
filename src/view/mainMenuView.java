@@ -14,18 +14,19 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
+
 import model.specialCards.builder;
 
 import static controller.menuController.getJSONRegexMatcher;
 
-public class mainMenuView extends menuView{
+public class mainMenuView extends menuView {
 
     private static String pathToRegexJSON = "src/Regex/MainMenuRegex.json";
 
-    public static void run( User currentUser,Scanner scanner) {
-
+    public static void run(User currentUser, Scanner scanner) {
 
 
         mainMenuController.welcome(currentUser);
@@ -39,6 +40,11 @@ public class mainMenuView extends menuView{
         }
         JsonObject MainMenuRegexObj = regexElement.getAsJsonObject();
 
+        if (currentUser.getLevel() == 0) {
+            mainMenuController.StartPack(new Random(), currentUser);
+            System.out.println("start pack");
+            currentUser.setLevel(1);
+        }
 
         while (true) {
             String command = input(scanner).trim();
@@ -50,8 +56,7 @@ public class mainMenuView extends menuView{
             if (command.matches("\\s*exit\\s*")) {
                 mainMenuView.output("exit");
                 System.exit(0);
-            }
-            else if (command.matches("user\\s+logout")) {
+            } else if (command.matches("user\\s+logout")) {
 
                 mainMenuView.output("logout");
                 JsonElement prefsElement;
@@ -66,7 +71,7 @@ public class mainMenuView extends menuView{
 
                 try {
                     String toBeWritten = prefsElement.toString();
-                    toBeWritten = toBeWritten.replace(currentUser.getUsername(),"!NULLUSER");
+                    toBeWritten = toBeWritten.replace(currentUser.getUsername(), "!NULLUSER");
                     FileWriter fileWriter = new FileWriter(pathToPrefs);
                     fileWriter.write(toBeWritten);
                     fileWriter.close();
@@ -89,25 +94,26 @@ public class mainMenuView extends menuView{
 //                gameMenuView.run( scanner, j,i,mapSize);
 //
 //            }
-            else if(profileMenuMatcher.find()){
+            else if (profileMenuMatcher.find()) {
                 profileMenuView.run(scanner, currentUser);
 
-            } else if(loadGameMatcher.find()){
+            } else if (loadGameMatcher.find()) {
 
 
-            } else{
+            } else {
                 output("invalid");
             }
         }
 
     }
-    public static void output(String code, Object... params){
+
+    public static void output(String code, Object... params) {
         String pathToJSON = "src/response/MainMenuResponses.json";
         menuView.output(pathToJSON, code, params);
     }
 
-    public static String input(Scanner scanner){
-        if(!scanner.hasNextLine())
+    public static String input(Scanner scanner) {
+        if (!scanner.hasNextLine())
             return "";
         return scanner.nextLine();
     }
