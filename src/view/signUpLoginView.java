@@ -47,6 +47,7 @@ public class signUpLoginView extends menuView{
                     menuRegexPatternsObject);
             Matcher forgotMyPassMatcher = getJSONRegexMatcher(input, "forgotMyPass",
                     menuRegexPatternsObject);
+            Matcher adminLoggedIn = getJSONRegexMatcher(input, "loginAdmin", menuRegexPatternsObject);
 
             if (registerMatcher.find()) {
                 String username = StringParser.removeQuotes(registerMatcher.group(3));
@@ -54,11 +55,11 @@ public class signUpLoginView extends menuView{
                 String passwordConfirmation = StringParser.removeQuotes(registerMatcher.group(6));
                 String email = StringParser.removeQuotes(registerMatcher.group(8));
                 String nickname = StringParser.removeQuotes(registerMatcher.group(12));
-                System.out.println(username);
-                System.out.println(password);
-                System.out.println(passwordConfirmation);
-                System.out.println(email);
-                System.out.println(nickname);
+//                System.out.println(username);
+//                System.out.println(password);
+//                System.out.println(passwordConfirmation);
+//                System.out.println(email);
+//                System.out.println(nickname);
                 if(username == null) {
                     signUpLoginView.output("registerusername404");
                     continue;
@@ -428,6 +429,10 @@ public class signUpLoginView extends menuView{
                 }
                 signUpLoginView.output("passChanged");
 
+            }
+            else if(adminLoggedIn.find()){
+                signUpLoginView.output("adminLogin");
+                AdminMenuView.run(scanner);
             }
             else{
                 signUpLoginView.output("invalid");
