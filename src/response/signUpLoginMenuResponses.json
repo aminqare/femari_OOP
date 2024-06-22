@@ -41,5 +41,6 @@
   "invalid": "Error!: Invalid command!",
 
   "captcha": "To verify that you are not a bot, please enter the following captcha:\n$VAR1$",
-  "captchainvalid": "Error!: entered captcha was wrong!"
+  "captchainvalid": "Error!: entered captcha was wrong!",
+  "adminLogin" : "Success!: Welcome the great creator of the game, THE GREAT FEMARI"
 }

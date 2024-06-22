@@ -127,7 +127,9 @@ public class profileMenuView {
             else if(displayAllMatcher.find()){
                 profileMenuView.output("show", currentUser.getUsername(),
                         currentUser.getEmail(), String.valueOf(currentUser.getScore()),
-                        currentUser.getNickname());
+                        currentUser.getNickname(),
+                        currentUser.getPlayerSpecialCards(),
+                        currentUser.getPlayerCards());
             }
             else{
                 profileMenuView.output("invalid");

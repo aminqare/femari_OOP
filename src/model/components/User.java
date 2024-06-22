@@ -12,11 +12,13 @@ public class User implements Serializable {
     private String username;
     private String password;
     private String nickname;
+    private int level;
+    private double gold;
     private String email;
     private int passwordRecoveryQuestion;
     private String passwordRecoveryAnswer;
     private ArrayList<cards> playerCards;
-    private ArrayList<specialCards> playerSpecialCards = new ArrayList<>();
+    private ArrayList<specialCards> playerSpecialCards ;
 
     public ArrayList<cards> getPlayerCards() {
         return playerCards;
@@ -36,6 +38,10 @@ public class User implements Serializable {
         this.email = email;
         this.passwordRecoveryQuestion = passwordRecoveryQuestion;
         this.passwordRecoveryAnswer = passwordRecoveryAnswer;
+        playerCards =new ArrayList<>();
+        playerSpecialCards = new ArrayList<>();
+        this.gold=80;
+        this.level=1;
     }
 
     public String getUsername() {

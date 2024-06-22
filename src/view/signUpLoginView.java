@@ -47,6 +47,7 @@ public class signUpLoginView extends menuView{
                     menuRegexPatternsObject);
             Matcher forgotMyPassMatcher = getJSONRegexMatcher(input, "forgotMyPass",
                     menuRegexPatternsObject);
+            Matcher adminLoggedIn = getJSONRegexMatcher(input, "loginAdmin", menuRegexPatternsObject);
 
             if (registerMatcher.find()) {
                 String username = StringParser.removeQuotes(registerMatcher.group(3));
@@ -428,6 +429,10 @@ public class signUpLoginView extends menuView{
                 }
                 signUpLoginView.output("passChanged");
 
+            }
+            else if(adminLoggedIn.find()){
+                signUpLoginView.output("adminLogin");
+                AdminMenuView.run(scanner);
             }
             else{
                 signUpLoginView.output("invalid");

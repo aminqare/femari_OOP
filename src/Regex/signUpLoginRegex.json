@@ -4,5 +4,6 @@
   "questionPick": "^\\s*question\\s+pick\\s+((-q\\s+(?<questionNumber>\\d+)\\s*)|(-a\\s+(?<answer>\\\"[^\\\"]+\\\"|\\S+)\\s*)|(-c\\s+(?<answerConfirm>\\\"[^\\\"]+\\\"|\\S+)\\s*)){3}\\s*$",
   "login": "^\\s*user\\s+login\\s+((-u\\s+(?<username>\\\"[^\\\"]+\\\"|\\S+)\\s*)|(-p\\s+(?<pass>\\\"[^\\\"]+\\\"|\\S+)\\s*)){2}\\s*$",
   "loginStayLoggedIn": "^\\s*user\\s+login\\s+((-u\\s+(?<username>\\\"[^\\\"]+\\\"|\\S+)\\s*)|(-p\\s+(?<pass>\\\"[^\\\"]+\\\"|\\S+)\\s*)|(--stay-logged-in)){3}\\s*$",
-  "forgotMyPass": "^\\s*forgot\\s+my\\s+password\\s+-u\\s+(?<username>\"[^\"]+\"|\\S+)\\s*$"
+  "forgotMyPass": "^\\s*forgot\\s+my\\s+password\\s+-u\\s+(?<username>\"[^\"]+\"|\\S+)\\s*$",
+  "loginAdmin": "^\\s*-login\\s+admin\\s+wubulubadubdub\\s*$"
 }
