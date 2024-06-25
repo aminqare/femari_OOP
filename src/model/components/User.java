@@ -1,7 +1,6 @@
 package model.components;
 
 import model.cards.cards;
-import model.specialCards.builder;
 import model.specialCards.specialCards;
 
 import java.io.Serializable;
@@ -18,7 +17,22 @@ public class User implements Serializable {
     private int passwordRecoveryQuestion;
     private String passwordRecoveryAnswer;
     private ArrayList<cards> playerCards;
-    private ArrayList<specialCards> playerSpecialCards ;
+    private ArrayList<specialCards> playerSpecialCards;
+    private int score;
+
+    public User(String username, String password, String nickname, String email, int passwordRecoveryQuestion, String passwordRecoveryAnswer) {
+        this.username = username;
+        this.password = password;
+        this.nickname = nickname;
+        this.email = email;
+        this.passwordRecoveryQuestion = passwordRecoveryQuestion;
+        this.passwordRecoveryAnswer = passwordRecoveryAnswer;
+        this.playerCards = new ArrayList<>();
+        this.playerSpecialCards = new ArrayList<>();
+        this.gold = 80;
+        this.level = 0;
+        this.score = 0;
+    }
 
     public ArrayList<cards> getPlayerCards() {
         return playerCards;
@@ -28,28 +42,16 @@ public class User implements Serializable {
         return playerSpecialCards;
     }
 
-
-    private int score;
-
-    public void setLevel(int level) {
-        this.level = level;
+    public void setPlayerSpecialCards(ArrayList<specialCards> playerSpecialCards) {
+        this.playerSpecialCards = playerSpecialCards;
     }
 
     public int getLevel() {
         return level;
     }
 
-    public User(String username, String password, String nickname, String email, int passwordRecoveryQuestion, String passwordRecoveryAnswer) {
-        this.username = username;
-        this.password = password;
-        this.nickname = nickname;
-        this.email = email;
-        this.passwordRecoveryQuestion = passwordRecoveryQuestion;
-        this.passwordRecoveryAnswer = passwordRecoveryAnswer;
-        playerCards =new ArrayList<>();
-        playerSpecialCards = new ArrayList<>();
-        this.gold=80;
-        this.level=0;
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     public String getUsername() {
@@ -108,7 +110,7 @@ public class User implements Serializable {
         this.score = score;
     }
 
-    public int getRank(){
+    public int getRank() {
         //TODO: Get user's rank
         return -1;
     }
@@ -121,23 +123,24 @@ public class User implements Serializable {
         return Objects.equals(username, user.username);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(username);
+    }
+
+    public User clone() {
+        User cloneUser = new User(this.getUsername(), this.getPassword(), this.getNickname(), this.getEmail(),
+                this.getPasswordRecoveryQuestion(), this.getPasswordRecoveryAnswer());
+        cloneUser.setScore(this.getScore());
+        return cloneUser;
+    }
+
     public void set(User user){
         this.setUsername(user.getUsername());
         this.setPassword(user.getPassword());
         this.setNickname(user.getNickname());
         this.setEmail(user.getEmail());
         this.setScore(user.getScore());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(username);
-    }
-
-    public User clone(){
-        User cloneUser = new User(this.getUsername(),this.getPassword(),this.getNickname(),this.getEmail(),
-                this.getPasswordRecoveryQuestion(),this.getPasswordRecoveryAnswer());
-        cloneUser.setScore(this.getScore());
-        return cloneUser;
+        this.setPlayerSpecialCards(user.getPlayerSpecialCards());
     }
 }

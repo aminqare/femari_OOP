@@ -6,6 +6,7 @@ import com.google.gson.JsonParser;
 import controller.profileMenuController;
 import controller.signUpMenuController;
 import controller.mainMenuController;
+import model.UsersDB;
 import model.cards.cards;
 import model.components.User;
 import model.specialCards.builder;
@@ -42,8 +43,9 @@ public class mainMenuView extends menuView {
 
         if (currentUser.getLevel() == 0) {
             mainMenuController.StartPack(new Random(), currentUser);
+            currentUser.setLevel(currentUser.getLevel()+1);
+            updateDB(currentUser);
             System.out.println("start pack");
-            currentUser.setLevel(1);
         }
 
         while (true) {
@@ -52,13 +54,14 @@ public class mainMenuView extends menuView {
             Matcher startGameMatcher = getJSONRegexMatcher(command, "startNewGame", MainMenuRegexObj);
             Matcher loadGameMatcher = getJSONRegexMatcher(command, "loadGame", MainMenuRegexObj);
             Matcher profileMenuMatcher = getJSONRegexMatcher(command, "profileMenu", MainMenuRegexObj);
+            Matcher ShowCardsMatcher = getJSONRegexMatcher(command, "showCards", MainMenuRegexObj);
 
             if (command.matches("\\s*exit\\s*")) {
-                mainMenuView.output("exit");
+                Output("exit");
                 System.exit(0);
             } else if (command.matches("user\\s+logout")) {
 
-                mainMenuView.output("logout");
+                mainMenuView.Output("logout");
                 JsonElement prefsElement;
                 String pathToPrefs = "src/database/preferences.json";
                 try {
@@ -100,14 +103,24 @@ public class mainMenuView extends menuView {
             } else if (loadGameMatcher.find()) {
 
 
+            }else if(ShowCardsMatcher.find()){
+                System.out.println("kir");
+//StringBuilder output=new StringBuilder();
+//output.append("YOUR CARDS\n");
+//output.append("Attack/Defence cards:\n");
+//                for (cards playerCard : currentUser.getPlayerCards()) {
+//
+//                }
+                Output("ShowCards",currentUser.getPlayerCards().toString(),currentUser.getPlayerSpecialCards().toString());
+
             } else {
-                output("invalid");
+                Output("invalid");
             }
         }
 
     }
 
-    public static void output(String code, Object... params) {
+    public static void Output(String code, Object... params) {
         String pathToJSON = "src/response/MainMenuResponses.json";
         menuView.output(pathToJSON, code, params);
     }
@@ -116,6 +129,15 @@ public class mainMenuView extends menuView {
         if (!scanner.hasNextLine())
             return "";
         return scanner.nextLine();
+    }
+    public static void updateDB(User currentUser){
+        UsersDB.usersDB.update(currentUser);
+        try {
+            UsersDB.usersDB.toJSON();
+        } catch (
+                IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

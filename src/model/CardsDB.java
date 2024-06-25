@@ -13,7 +13,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class CardsDB implements Serializable {
-    private List<cards> cards;
+    private static List<cards> cards;
     private final String pathToUsersDBJsonFile = "src/database/cards.json";
 
     public static CardsDB cardsDB = new CardsDB();
@@ -46,8 +46,8 @@ public class CardsDB implements Serializable {
         writer.close();
     }
 
-    public cards getAtIndex(int index){
-        return this.cards.get(index);
+    public static cards getAtIndex(int index){
+        return cards.get(index);
     }
 
     public void addCards(cards card){
@@ -63,7 +63,7 @@ public class CardsDB implements Serializable {
         return null;
     }
 
-    public List<cards> getCards() {
+    public static List<cards> getCards() {
         return cards;
     }
 
