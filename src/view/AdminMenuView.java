@@ -90,7 +90,7 @@ public class AdminMenuView {
             else if(editCards.find()){
                 for (int i = 0; i < CardsDB.cardsDB.getCards().size(); i++) {
                     String cardName = CardsDB.cardsDB.getCards().get(i).getName();
-                    System.out.println(i+1 + " " + cardName);
+                    System.out.println(i+1 + ". " + cardName);
                 }
             }
             else if(selection.find()){
