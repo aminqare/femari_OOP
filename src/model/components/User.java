@@ -17,16 +17,16 @@ public class User implements Serializable {
     private String email;
     private int passwordRecoveryQuestion;
     private String passwordRecoveryAnswer;
-    private ArrayList<cards> playerCards;
-    private ArrayList<specialCards> playerSpecialCards ;
+    //private ArrayList<cards> playerCards;
+    //private ArrayList<specialCards> playerSpecialCards ;
 
-    public ArrayList<cards> getPlayerCards() {
-        return playerCards;
-    }
-
-    public ArrayList<specialCards> getPlayerSpecialCards() {
-        return playerSpecialCards;
-    }
+//    public ArrayList<cards> getPlayerCards() {
+//        return playerCards;
+//    }
+//
+//    public ArrayList<specialCards> getPlayerSpecialCards() {
+//        return playerSpecialCards;
+//    }
 
 
     private int score;
@@ -46,8 +46,8 @@ public class User implements Serializable {
         this.email = email;
         this.passwordRecoveryQuestion = passwordRecoveryQuestion;
         this.passwordRecoveryAnswer = passwordRecoveryAnswer;
-        playerCards =new ArrayList<>();
-        playerSpecialCards = new ArrayList<>();
+//        playerCards =new ArrayList<>();
+//        playerSpecialCards = new ArrayList<>();
         this.gold=80;
         this.level=0;
     }
@@ -111,6 +111,14 @@ public class User implements Serializable {
     public int getRank(){
         //TODO: Get user's rank
         return -1;
+    }
+
+    public double getGold() {
+        return gold;
+    }
+
+    public void setGold(double gold) {
+        this.gold = gold;
     }
 
     @Override

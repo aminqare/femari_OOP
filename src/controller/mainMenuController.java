@@ -23,20 +23,20 @@ public class mainMenuController extends menuController{
         System.out.println("\u001B[45m\u001B[30mWELCOME, " + currentUser.getNickname() + "!\u001B[0m");
 
     }
-    public static void StartPack(Random random,User cuurentUser){
-        ArrayList<specialCards> playerSpecialCards=cuurentUser.getPlayerSpecialCards();
-        double SpecialCardWeght=0.3;
-        double CardsWeight=0.7;
-
-        for(int i=0;i<20;i++){
-            double randomVal= random.nextDouble();
-            if(randomVal%1<CardsWeight){
-                //TODO add cards
-            }else{
-                addSpecialCards(random,playerSpecialCards,AdminMenuController.GameSpecialCardsName);
-            }
-        }
-    }
+//    public static void StartPack(Random random,User cuurentUser){
+//        ArrayList<specialCards> playerSpecialCards=cuurentUser.getPlayerSpecialCards();
+//        double SpecialCardWeght=0.3;
+//        double CardsWeight=0.7;
+//
+//        for(int i=0;i<20;i++){
+//            double randomVal= random.nextDouble();
+//            if(randomVal%1<CardsWeight){
+//                //TODO add cards
+//            }else{
+//                addSpecialCards(random,playerSpecialCards,AdminMenuController.GameSpecialCardsName);
+//            }
+//        }
+//    }
     public static void addSpecialCards(Random random,ArrayList<specialCards> playerCards,ArrayList<String> names){
         int randomIndex= random.nextInt()%names.size();
         String name= names.get(randomIndex);

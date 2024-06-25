@@ -4,7 +4,16 @@
   "editCards" : "^\\s*edit\\s+cards\\s*$",
   "removeCards" : "^\\s*remove\\s+cards\\s*$",
   "showPlayers" : "^\\s*show\\s+all\\s+players\\s*$",
-  "confirm" : "y",
-  "disconfirm" : "n",
-  "selection": "^\\s*(?<selection>\\d+)\\s*$"
+  "confirmEdit" : "^\\s*y\\s*$",
+  "confirmRemove": "^\\s*yes\\s*$",
+  "disconfirm" : "^\\s*n\\s*$",
+  "selectionEdit": "^\\s*edit\\s+(?<selection>\\d+)\\s*$",
+  "selectionRemove": "^\\s*remove\\s+(?<selection>\\d+)\\s*$",
+  "nameChange": "^\\s*name\\s+change\\s+(?<name>\\\"[^\\\"]+\\\"|\\S+)\\s*$",
+  "defenceChange": "^\\s*defence\\s+change\\s+(?<cardDefence>\\d+)\\s*$",
+  "attackChange": "^\\s*attack\\s+change\\s+(?<cardAttack>\\d+)\\s*$",
+  "durationChange": "^\\s*duration\\s+change\\s+(?<duration>\\d+)\\s*$",
+  "damageChange": "^\\s*damage\\s+change\\s+(?<damage>\\d+)\\s*$",
+  "upgradeLevelChange": "^\\s*upgradeLevel\\s+change\\s+(?<upgradeLevel>\\d+)\\s*$",
+  "upCostChange": "^\\s*upCost\\s+change\\s+(?<upCost>\\d+)\\s*$"
 }
