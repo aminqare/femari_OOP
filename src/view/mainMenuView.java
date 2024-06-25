@@ -40,11 +40,11 @@ public class mainMenuView extends menuView {
         }
         JsonObject MainMenuRegexObj = regexElement.getAsJsonObject();
 
-        if (currentUser.getLevel() == 0) {
-            mainMenuController.StartPack(new Random(), currentUser);
-            System.out.println("start pack");
-            currentUser.setLevel(1);
-        }
+//        if (currentUser.getLevel() == 0) {
+//            mainMenuController.StartPack(new Random(), currentUser);
+//            System.out.println("start pack");
+//            currentUser.setLevel(1);
+//        }
 
         while (true) {
             String command = input(scanner).trim();
