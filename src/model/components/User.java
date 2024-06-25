@@ -3,9 +3,12 @@ package model.components;
 import model.cards.cards;
 import model.specialCards.builder;
 import model.specialCards.specialCards;
+import model.utils.SpecialCardsDB;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class User implements Serializable {
@@ -18,16 +21,17 @@ public class User implements Serializable {
     private int passwordRecoveryQuestion;
     private String passwordRecoveryAnswer;
     private ArrayList<cards> playerCards;
-    private ArrayList<specialCards> playerSpecialCards ;
 
     public ArrayList<cards> getPlayerCards() {
         return playerCards;
     }
 
-    public ArrayList<specialCards> getPlayerSpecialCards() {
-        return playerSpecialCards;
-    }
+   private  SpecialCardsDB specialCardsDB;
+    private List<specialCards> playerSpecialCards;
 
+    public SpecialCardsDB getSpecialCardsDB() {
+        return specialCardsDB;
+    }
 
     private int score;
 
@@ -39,6 +43,8 @@ public class User implements Serializable {
         return level;
     }
 
+
+
     public User(String username, String password, String nickname, String email, int passwordRecoveryQuestion, String passwordRecoveryAnswer) {
         this.username = username;
         this.password = password;
@@ -46,10 +52,14 @@ public class User implements Serializable {
         this.email = email;
         this.passwordRecoveryQuestion = passwordRecoveryQuestion;
         this.passwordRecoveryAnswer = passwordRecoveryAnswer;
-        playerCards =new ArrayList<>();
-        playerSpecialCards = new ArrayList<>();
         this.gold=80;
         this.level=0;
+        this.specialCardsDB=new SpecialCardsDB();
+        this.playerSpecialCards=specialCardsDB.getCards();
+
+    }
+    public List<specialCards> getPlayerSpecialCards() {
+        return playerSpecialCards;
     }
 
     public String getUsername() {
@@ -140,4 +150,15 @@ public class User implements Serializable {
         cloneUser.setScore(this.getScore());
         return cloneUser;
     }
+    public static void addSpecialCards(specialCards specialCards){
+        SpecialCardsDB.specialCardsDB.addCards(specialCards);
+        try {
+            SpecialCardsDB.specialCardsDB.toJSON();
+        } catch (
+                IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 }

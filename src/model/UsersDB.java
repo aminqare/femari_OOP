@@ -19,6 +19,7 @@ import java.util.List;
 
 public class UsersDB implements Serializable {
     private List<User> users;
+
     private final String pathToUsersDBJsonFile = "src/database/users.json";
 
     public static UsersDB usersDB = new UsersDB();
@@ -49,6 +50,7 @@ public class UsersDB implements Serializable {
         writer.write(jsonData);
         writer.close();
     }
+
 
     public User getAtIndex(int index){
         return this.users.get(index);

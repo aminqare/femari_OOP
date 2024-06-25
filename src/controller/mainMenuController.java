@@ -3,10 +3,12 @@ package controller;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import model.CardsDB;
 import model.components.User;
 import model.UsersDB;
 //import view.gameMenuView;
 import model.specialCards.*;
+import model.utils.SpecialCardsDB;
 import view.mainMenuView;
 
 import java.io.FileNotFoundException;
@@ -24,7 +26,7 @@ public class mainMenuController extends menuController{
 
     }
     public static void StartPack(Random random,User cuurentUser){
-        ArrayList<specialCards> playerSpecialCards=cuurentUser.getPlayerSpecialCards();
+
         double SpecialCardWeght=0.3;
         double CardsWeight=0.7;
 
@@ -33,35 +35,37 @@ public class mainMenuController extends menuController{
             if(randomVal%1<CardsWeight){
                 //TODO add cards
             }else{
-                addSpecialCards(random,playerSpecialCards,AdminMenuController.GameSpecialCardsName);
+                addSpecialCards(random,AdminMenuController.GameSpecialCardsName,cuurentUser);
             }
         }
     }
-    public static void addSpecialCards(Random random,ArrayList<specialCards> playerCards,ArrayList<String> names){
-        int randomIndex= random.nextInt()%names.size();
+    public static void addSpecialCards(Random random,ArrayList<String> names,User curentUser){
+        int randomIndex= Math.abs(random.nextInt()%10);
         String name= names.get(randomIndex);
         if(name.equals("shield")){
-            playerCards.add(new shield());
+            curentUser.getPlayerSpecialCards().add(new shield());
         }else if(name.equals("roundDefuser")){
-            playerCards.add(new roundDefuser());
+            curentUser.getPlayerSpecialCards().add(new roundDefuser());
         }else if(name.equals("powerade")){
-            playerCards.add(new powerade());
+            curentUser.getPlayerSpecialCards().add(new powerade());
         }else if(name.equals("oppsCardDefuser")){
-            playerCards.add(new oppsCardDefuser());
+            curentUser.getPlayerSpecialCards().add(new oppsCardDefuser());
         }else if(name.equals("mole")){
-            playerCards.add(new mole());
+            curentUser.getPlayerSpecialCards().add(new mole());
         }else if(name.equals("mehradHidden")){
-            playerCards.add(new mehradHidden());
+            curentUser.getPlayerSpecialCards().add(new mehradHidden());
         }else if(name.equals("heal")){
-            playerCards.add(new heal());
+            curentUser.getPlayerSpecialCards().add(new heal());
         }else if(name.equals("copyCat")){
-            playerCards.add(new copyCat());
+            curentUser.getPlayerSpecialCards().add(new copyCat());
         }else if(name.equals("cardSnatcher")){
-            playerCards.add(new cardSnatcher());
+            curentUser.getPlayerSpecialCards().add(new cardSnatcher());
         }else if(name.equals("builder")){
-            playerCards.add(new builder());
+            curentUser.getPlayerSpecialCards().add(new builder());
         }
     }
+
+
 
 
 }
