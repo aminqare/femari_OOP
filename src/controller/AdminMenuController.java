@@ -37,7 +37,15 @@ public class AdminMenuController {
             throw new RuntimeException(e);
         }
     }
+    public static void updateDB(cards card){
+        CardsDB.cardsDB.update(card);
+        try {
+            CardsDB.cardsDB.toJSON();
+        } catch (
+                IOException e) {
+            throw new RuntimeException(e);
+        }
 
 
 
-}
+}}
