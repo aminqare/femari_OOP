@@ -3,6 +3,7 @@ package view;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import controller.AdminMenuController;
 import model.UsersDB;
 import model.components.Captcha;
 import model.components.User;
@@ -23,6 +24,7 @@ public class signUpLoginView extends menuView{
     private static String pathToRegexJSON = "src/Regex/signUpLoginRegex.json";
     private static User currentUser;
     public static void run(Scanner scanner){
+        System.out.println(AdminMenuController.GameSpecialCardsName.toString());
         int failedAttempts = 0;
          long nextAttemptTime=0;
         JsonElement regexElement = null;

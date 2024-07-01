@@ -18,6 +18,15 @@ public class cards {
         this.level = level;
         this.upgradeCost = upgradeCost;
     }
+    public cards(cards card){
+        this.name = card.getName();
+        this.defence = card.getDefence();
+        this.attack = card.getAttack();
+        this.duration = card.getDuration();
+        this.damage =card.getDamage();
+        this.level = card.getLevel();
+        this.upgradeCost = card.getUpgradeCost();
+    }
 
     public String getName() {
         return name;
@@ -45,5 +54,11 @@ public class cards {
 
     public double getUpgradeCost() {
         return upgradeCost;
+    }
+
+    @Override
+    public String toString() {
+        String output="Name: "+this.getName()+" Defence: "+String.valueOf(this.getDefence())+" Attack: "+String.valueOf(this.getAttack())+" Duration: "+String.valueOf(this.getDuration())+" Damage: "+String.valueOf(this.getDamage())+" Level: "+String.valueOf(this.getLevel())+" UpgradeCost: "+String.valueOf(this.getUpgradeCost()+"\n");
+        return output;
     }
 }

@@ -1,3 +1,5 @@
 {
-  "logout": "Success!: user logged out successfully"
+  "logout": "Success!: user logged out successfully",
+  "invalid": "Error!:invalid command",
+  "ShowCards": "YOUR CARDS:\nAttack/Defence Cards: $VAR1$\nSpecialCards: $VAR2$"
 }

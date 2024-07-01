@@ -10,7 +10,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class AdminMenuController {
-    public ArrayList< cards> GameCards=new ArrayList<>();
+    public static ArrayList<String> GameSpecialCardsName=new ArrayList<>(){{
+        add("shield");
+        add("roundDefuser");
+        add("powerade");
+        add("oppsCardDefuser");
+        add("mole");
+        add("mehradHidden");
+        add("heal");
+        add("copyCat");
+        add("cardSnatcher");
+        add("builder");
+    }};
+
     public static boolean nameExists(String name){
         return CardsDB.cardsDB.getCardByName(name) != null;
     }
@@ -25,5 +37,7 @@ public class AdminMenuController {
             throw new RuntimeException(e);
         }
     }
+
+
 
 }

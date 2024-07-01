@@ -128,8 +128,8 @@ public class profileMenuView {
                 profileMenuView.output("show", currentUser.getUsername(),
                         currentUser.getEmail(), String.valueOf(currentUser.getScore()),
                         currentUser.getNickname(),
-                        currentUser.getPlayerSpecialCards(),
-                        currentUser.getPlayerCards());
+                        currentUser.getPlayerSpecialCards().toString(),
+                        currentUser.getPlayerCards().toString(),String.valueOf(currentUser.getLevel()));
             }
             else{
                 profileMenuView.output("invalid");
