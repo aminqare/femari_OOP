@@ -19,7 +19,7 @@ public class CardsDB implements Serializable {
     public static CardsDB cardsDB = new CardsDB();
 
     public CardsDB(){
-        this.cards = new ArrayList<>();
+        cards = new ArrayList<>();
         try {
             this.fromJSON();
         } catch (
@@ -33,14 +33,14 @@ public class CardsDB implements Serializable {
         JsonObject cardsDBJson;
         Gson gson = new Gson();
         FileReader usersJSON = new FileReader(pathToUsersDBJsonFile);
-        this.cards = gson.fromJson(usersJSON, new TypeToken<List<cards>>(){}.getType());
+        cards = gson.fromJson(usersJSON, new TypeToken<List<cards>>(){}.getType());
         usersJSON.close();
     }
 
     public void toJSON() throws IOException {
         Gson gson = new Gson();
         FileWriter usersJSON = new FileWriter(pathToUsersDBJsonFile);
-        String jsonData = gson.toJson(this.cards, new TypeToken<List<cards>>(){}.getType());
+        String jsonData = gson.toJson(cards, new TypeToken<List<cards>>(){}.getType());
         BufferedWriter writer = new BufferedWriter(usersJSON);
         writer.write(jsonData);
         writer.close();
@@ -51,11 +51,11 @@ public class CardsDB implements Serializable {
     }
 
     public void addCards(cards card){
-        this.cards.add(card);
+        cards.add(card);
     }
 
-    public cards getCardByName(String name){
-        for(cards card: this.cards){
+    public static cards getCardByName(String name){
+        for(cards card: cards){
             if(card.getName().equals(name)){
                 return card;
             }
@@ -68,15 +68,23 @@ public class CardsDB implements Serializable {
     }
 
     public void removeCardsByName(String name){
-        this.cards.remove(this.getCardByName(name));
+        cards.remove(getCardByName(name));
     }
 
     public void update(cards card){
-        for(cards iter: this.cards){
+        for(cards iter: cards){
             if(card.equals(card)){
                 iter = card;
                 return;
             }
         }
+    }
+    public static boolean IsCardName(String name){
+        for (cards card : cards) {
+            if(card.getName().equals(name)){
+                return true;
+            }
+        }
+        return false;
     }
 }

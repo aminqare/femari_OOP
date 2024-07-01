@@ -23,6 +23,15 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 public class mainMenuController extends menuController{
+    public static int getRound() {
+        return Round;
+    }
+
+    public static void setRound(int round) {
+        Round = round;
+    }
+
+    private static int Round=3;
     public static void welcome(User currentUser){
         System.out.println("\u001B[45m\u001B[30mWELCOME, " + currentUser.getNickname() + "!\u001B[0m");
 

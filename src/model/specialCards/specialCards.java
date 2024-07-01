@@ -12,8 +12,17 @@ import java.util.List;
 
 public abstract class specialCards implements Serializable {
     private String name;
-    private int level;
+    private int level=1;
     private int duration;
+    private double price;
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
 
     public String getName() {
         return name;
@@ -35,7 +44,12 @@ public abstract class specialCards implements Serializable {
         this.duration = duration;
     }
 
-    abstract void run();
+    abstract void run(Object param);
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         String output="Name: "+this.getName()+" Level: "+String.valueOf(this.getLevel())+" Duration: "+String.valueOf(this.getDuration())+"\n";

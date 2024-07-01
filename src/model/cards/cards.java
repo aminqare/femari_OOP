@@ -89,4 +89,21 @@ public class cards {
     public void setUpgradeCost(double upgradeCost) {
         this.upgradeCost = upgradeCost;
     }
+    public void DeCreaseDamage(){
+        int newDamage=(int)Math.ceil(this.getDamage()*0.7);
+        this.setDamage(newDamage);
+    }
+    public void DeCreasePower(){
+        int newAttack=(int)Math.ceil(this.getAttack()*0.7);
+        this.setAttack(newAttack);
+        int newDefence=(int)Math.ceil(this.getDefence()*0.7);
+        this.setDefence(newDefence);
+    }
+    public void powerUp(){
+        int newAttack=(int)Math.ceil(this.getAttack()*1.5);
+        this.setAttack(newAttack);
+        int newDefence=(int)Math.ceil(this.getDefence()*1.5);
+        this.setDefence(newDefence);
+
+    }
 }
