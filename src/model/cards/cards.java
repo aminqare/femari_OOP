@@ -1,5 +1,11 @@
 package model.cards;
 
+import model.specialCards.specialCards;
+
+import java.sql.Array;
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class cards {
     private String name;
     private double defence;
@@ -105,5 +111,31 @@ public class cards {
         int newDefence=(int)Math.ceil(this.getDefence()*1.5);
         this.setDefence(newDefence);
 
+    }
+    public static cards GetCardByName(ArrayList<cards> cards,String name){
+        for (cards card : cards) {
+            if(card.getName().equals(name)){
+                return card;
+            }
+        }
+        return null;
+
+    }
+    public static void ShowCards(ArrayList<cards> cards, ArrayList<specialCards> specialCards){
+        StringBuilder output=new StringBuilder();
+        int Index=0;
+        for (cards playerCard : cards) {
+            Index++;
+            output.append(Index+"."+playerCard.toString()+"\n");
+        }
+        for (specialCards playerSpecialCard : specialCards) {
+            Index++;
+            output.append(Index+"."+playerSpecialCard.toString()+"\n");
+        }
+        System.out.print(output);
+    }
+    public static void ShuffleCards(ArrayList<cards> cards,ArrayList<specialCards> specialCards){
+        Collections.shuffle(cards);
+        Collections.shuffle(specialCards);
     }
 }

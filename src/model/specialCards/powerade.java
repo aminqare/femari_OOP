@@ -30,7 +30,7 @@ public class powerade extends specialCards {
         ArrayList<String> playerGameBoard = player.getGameBoard().getBoard();
         for (String s : playerGameBoard) {
             if (CardsDB.IsCardName(s)) {
-                tempCards.add(CardsDB.getCardByName(s));
+               tempCards.add(cards.GetCardByName(player.getPlayerCardsDeck(),s));
             }
         }
         int randomIndex = game.getRandom().nextInt(tempCards.size());

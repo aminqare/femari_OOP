@@ -15,6 +15,16 @@ public class Player extends User{
     private boolean IsTurn=false;
     private gameBoard gameBoard=new gameBoard();
 
+    public boolean isHasMehradHidden() {
+        return hasMehradHidden;
+    }
+
+    public void setHasMehradHidden(boolean hasMehradHidden) {
+        this.hasMehradHidden = hasMehradHidden;
+    }
+
+    private boolean hasMehradHidden=false;
+
     public boolean isTurn() {
         return IsTurn;
     }
