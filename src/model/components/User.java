@@ -1,6 +1,7 @@
 package model.components;
 
 import model.cards.cards;
+import model.specialCards.builder;
 import model.specialCards.specialCards;
 
 import java.io.Serializable;
@@ -113,6 +114,14 @@ public class User implements Serializable {
     public int getRank() {
         //TODO: Get user's rank
         return -1;
+    }
+
+    public double getGold() {
+        return gold;
+    }
+
+    public void setGold(double gold) {
+        this.gold = gold;
     }
 
     @Override

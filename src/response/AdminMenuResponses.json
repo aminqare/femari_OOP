@@ -4,8 +4,9 @@
   "errorHandling" : "Error!: Wrong input",
   "editCard" : "ARE YOU SURE THAT YOU WANT TO EDIT THIS CARD? Y/N",
   "cardEdited" : "Success!: card successfully edited",
-  "deleteCard" : "ARE YPU SURE YOU WANT TO DELETE THIS CARD? Y/N",
+  "deleteCard" : "ARE YOU SURE YOU WANT TO DELETE THIS CARD? Y/N",
   "cardDeleted" : "Success!: card deleted successfully",
   "show": "PROFILE INFO:\nUsername: $VAR1$\nLevel: $VAR2$\nAccount Balance: $VAR3$",
-  "showCards": "CARD INFO:\nName: $VAR1$\nDefence: $VAR2$\nAttack: $VAR3$\nDuration: $VAR4$ \nDamage: $VAR5$\nUpgradeLevel: $VAR6$\nUpgradeCost: $VAR7$"
+  "showCards": "CARD INFO:\nName: $VAR1$\nDefence: $VAR2$\nAttack: $VAR3$\nDuration: $VAR4$ \nDamage: $VAR5$\nUpgradeLevel: $VAR6$\nUpgradeCost: $VAR7$",
+  "updated": "Success! Card updated successfully"
 }
