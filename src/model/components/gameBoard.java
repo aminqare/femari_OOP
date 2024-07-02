@@ -10,9 +10,10 @@ public class gameBoard {
         Integer playerRandomIndex = random.nextInt(21);
         for (int i = 0; i < 21; i++) {
             if(i != playerRandomIndex){
-            Board.add(i, "0");
+            Board.add( "0");
+            }else {
+                Board.add("1");
             }
-            Board.add(playerRandomIndex, "1");
         }
 
     }

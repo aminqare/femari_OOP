@@ -3,18 +3,18 @@ package model.components;
 import java.util.Date;
 
 public class superGame {
-    private static int Round=4;
+    private  int Round=4;
     private Player playerOne;
     private Player playerTwo;
     private String winner;
     private String loser;
     private Date date;
-    public static int getRound() {
-        return Round;
+    public int getRound() {
+        return this.Round;
     }
 
-    public static void setRound(int round) {
-        Round = round;
+    public  void setRound(int round) {
+        this.Round = round;
     }
 
     public Player getPlayerOne() {

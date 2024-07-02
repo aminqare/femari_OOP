@@ -3,6 +3,6 @@
   "loadGame": "^\\s*load\\s+last\\s+game\\s*$",
   "profileMenu": "^\\s*enter\\s+profile\\s+menu\\s*$",
   "showCards": "^\\s*show\\s+cards\\s*$",
-  "enterGameMenu": "^\\s*start\\s+game\\s+with\\s+u\\s+(?<username>\\\"[^\\\"]+\\\"|\\S+)\\s+p\\s+(?<pass>\\\"[^\\\"]+\\\"|\\S+)\\s*)",
-  "enterShopMenu": "^\\s*enter\\s+shop\\s+menu"
+  "enterGameMenu": "^\\s*start\\s+game\\s+with\\s+(u\\s+(?<username>\\\"[^\\\"]+\\\"|\\S+)\\s+p\\s+|(?<pass>\\\"[^\\\"]+\\\"|\\S+)){0,2}\\s*",
+  "enterShopMenu": "^\\s*enter\\s+shop\\s+menu\\s*$"
 }

@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import model.CardsDB;
 import model.cards.cards;
+import model.specialCards.shield;
 import model.specialCards.specialCards;
 
 import java.io.*;
