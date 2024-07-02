@@ -5,6 +5,7 @@ import model.specialCards.specialCards;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 public class cards {
     private String name;
@@ -12,6 +13,7 @@ public class cards {
     private double attack;
     private int duration;
     private double damage;
+    private double price;
     private int level;
     private double upgradeCost;
 
@@ -23,6 +25,15 @@ public class cards {
         this.damage = damage;
         this.level = level;
         this.upgradeCost = upgradeCost;
+    }
+
+    public double getPrice() {
+        setPrice();
+        return price;
+    }
+
+    public void setPrice() {
+        this.price = 5 * attack - 0.5 * duration + 5 * defence;
     }
 
     public String getName() {
@@ -50,6 +61,7 @@ public class cards {
     }
 
     public double getUpgradeCost() {
+        setUpgradeCost(upgradeCost);
         return upgradeCost;
     }
 
@@ -80,7 +92,7 @@ public class cards {
 
     @Override
     public String toString() {
-        String output="Name: "+this.getName()+" Defence: "+String.valueOf(this.getDefence())+" Attack: "+String.valueOf(this.getAttack())+" Duration: "+String.valueOf(this.getDuration())+" Damage: "+String.valueOf(this.getDamage())+" Level: "+String.valueOf(this.getLevel())+" UpgradeCost: "+String.valueOf(this.getUpgradeCost()+"\n");
+        String output="Name: "+this.getName()+" Defence: "+String.valueOf(this.getDefence())+" Attack: "+String.valueOf(this.getAttack())+" Duration: "+String.valueOf(this.getDuration())+" Damage: "+String.valueOf(this.getDamage())+" Level: "+String.valueOf(this.getLevel())+" UpgradeCost: "+String.valueOf(this.getUpgradeCost()+ " Price: " + String.valueOf(this.getPrice()) +"\n");
         return output;
     }
 
@@ -93,7 +105,7 @@ public class cards {
     }
 
     public void setUpgradeCost(double upgradeCost) {
-        this.upgradeCost = upgradeCost;
+        this.upgradeCost = upgradeCost * 1.2 * level;
     }
     public void DeCreaseDamage(){
         int newDamage=(int)Math.ceil(this.getDamage()*0.7);
@@ -110,9 +122,8 @@ public class cards {
         this.setAttack(newAttack);
         int newDefence=(int)Math.ceil(this.getDefence()*1.5);
         this.setDefence(newDefence);
-
     }
-    public static cards GetCardByName(ArrayList<cards> cards,String name){
+    public static cards GetCardByName(List<cards> cards, String name){
         for (cards card : cards) {
             if(card.getName().equals(name)){
                 return card;

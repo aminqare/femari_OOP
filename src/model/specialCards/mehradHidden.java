@@ -13,6 +13,11 @@ public class mehradHidden extends specialCards {
             System.out.println("ridi");
         }
     }
+    public  mehradHidden(){
+        this.setDuration(4);
+        this.setName("mehrad Hidden");
+        this.setPrice(42);
+    }
 
     public void run(Game game) {
         game.getCurrentEnemy().setHasMehradHidden(true);

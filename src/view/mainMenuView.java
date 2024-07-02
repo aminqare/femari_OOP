@@ -50,8 +50,6 @@ public class mainMenuView extends menuView {
 
         while (true) {
             String command = input(scanner).trim();
-
-            Matcher startGameMatcher = getJSONRegexMatcher(command, "startNewGame", MainMenuRegexObj);
             Matcher loadGameMatcher = getJSONRegexMatcher(command, "loadGame", MainMenuRegexObj);
             Matcher profileMenuMatcher = getJSONRegexMatcher(command, "profileMenu", MainMenuRegexObj);
             Matcher ShowCardsMatcher = getJSONRegexMatcher(command, "showCards", MainMenuRegexObj);
@@ -97,7 +95,10 @@ public class mainMenuView extends menuView {
             }else if(ShowCardsMatcher.find()){
                 Output("ShowCards",currentUser.getPlayerCards().toString(),currentUser.getPlayerSpecialCards().toString());
 
-            } else {
+            } else if(enterShopMenu.find()){
+                System.out.println("kir");
+                shopMenuView.run(scanner, currentUser);
+            }else {
                 Output("invalid");
             }
         }
