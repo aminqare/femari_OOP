@@ -55,6 +55,8 @@ public class mainMenuView extends menuView {
             Matcher loadGameMatcher = getJSONRegexMatcher(command, "loadGame", MainMenuRegexObj);
             Matcher profileMenuMatcher = getJSONRegexMatcher(command, "profileMenu", MainMenuRegexObj);
             Matcher ShowCardsMatcher = getJSONRegexMatcher(command, "showCards", MainMenuRegexObj);
+            Matcher startNewGame = getJSONRegexMatcher(command, "enterGameMenu", MainMenuRegexObj);
+            Matcher enterShopMenu = getJSONRegexMatcher(command, "enterShopMenu", MainMenuRegexObj);
 
             if (command.matches("\\s*exit\\s*")) {
                 Output("exit");
@@ -86,17 +88,6 @@ public class mainMenuView extends menuView {
                 break;
 
             }
-//            else if ((startGameMatcher = getJSONRegexMatcher(command, "startNewGame", MainMenuRegexObj)).matches()){
-//                int i=Integer.parseInt(startGameMatcher.group("opponent"));
-//                int j=Integer.parseInt(startGameMatcher.group("rounds"));
-//                Scanner scanner1=new Scanner(System.in);
-//                System.out.println("enter map size:");
-//                int mapSize=scanner1.nextInt();
-//
-//
-//                gameMenuView.run( scanner, j,i,mapSize);
-//
-//            }
             else if (profileMenuMatcher.find()) {
                 profileMenuView.run(scanner, currentUser);
 
@@ -104,13 +95,6 @@ public class mainMenuView extends menuView {
 
 
             }else if(ShowCardsMatcher.find()){
-                System.out.println("kir");
-//StringBuilder output=new StringBuilder();
-//output.append("YOUR CARDS\n");
-//output.append("Attack/Defence cards:\n");
-//                for (cards playerCard : currentUser.getPlayerCards()) {
-//
-//                }
                 Output("ShowCards",currentUser.getPlayerCards().toString(),currentUser.getPlayerSpecialCards().toString());
 
             } else {

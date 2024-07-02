@@ -9,11 +9,25 @@ import java.util.Locale;
 import java.util.Random;
 
 public class Game {
-    private String winner;
-    private String loser;
     private Player playerOne;
     private Player playerTwo;
-    private Date date;
+
+    public Random getRandom() {
+        return random;
+    }
+
+    public void setRandom(Random random) {
+        this.random = random;
+    }
+
+    private Random random = new Random();
+
+    public Game(superGame superGame) {
+        this.playerOne = superGame.getPlayerOne();
+        this.playerTwo = superGame.getPlayerTwo();
+        addRandCards(playerOne);
+        addRandCards(playerTwo);
+    }
 
     public Player getPlayerOne() {
         return playerOne;
@@ -29,24 +43,6 @@ public class Game {
 
     public void setPlayerTwo(Player playerTwo) {
         this.playerTwo = playerTwo;
-    }
-
-    public Random getRandom() {
-        return random;
-    }
-
-    public void setRandom(Random random) {
-        this.random = random;
-    }
-
-    private Random random = new Random();
-
-    public Game(Player playerOne, Player playerTwo) {
-        this.playerOne = playerOne;
-        this.playerTwo = playerTwo;
-        addRandCards(playerOne);
-        addRandCards(playerTwo);
-        this.date=new Date();
     }
 
     public void addRandCards(Player player) {

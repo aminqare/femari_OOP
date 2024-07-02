@@ -2,6 +2,7 @@ package model.specialCards;
 
 import controller.mainMenuController;
 import model.components.Game;
+import model.components.superGame;
 
 //kam konandeh round
 public class roundDefuser extends specialCards{
@@ -20,7 +21,7 @@ public class roundDefuser extends specialCards{
         }
     }
     public void run(Game game){
-        if(mainMenuController.getRound()>0)
-        mainMenuController.setRound(mainMenuController.getRound()-1);
+        if(superGame.getRound()>0)
+        superGame.setRound(superGame.getRound()-1);
     }
 }
