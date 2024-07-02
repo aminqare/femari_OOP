@@ -1,0 +1,12 @@
+{
+  "cardNull": "Error!: you don't have this card in your deck",
+  "cardOnDeck": "Error!: you already have this card on your deck",
+  "notEnoughMoney": "Error!: you don't have enough money for this action",
+  "successfulUpdate": "Success!: selected card updated successfully",
+  "successfulPurchase": "Success!: selected card is now in your battle deck",
+  "invalid": "Error!: sorry, I didn't get that"
+
+
+
+
+}

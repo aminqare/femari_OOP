@@ -1,7 +1,6 @@
 package model.components;
 
 import model.cards.cards;
-import model.specialCards.builder;
 import model.specialCards.specialCards;
 
 import java.io.Serializable;
@@ -45,6 +44,24 @@ public class User implements Serializable {
 
     public void setPlayerSpecialCards(ArrayList<specialCards> playerSpecialCards) {
         this.playerSpecialCards = playerSpecialCards;
+    }
+    public static cards GetCardByName(ArrayList<cards> cards, String name){
+        for (cards card : cards) {
+            if(card.getName().equals(name)){
+                return card;
+            }
+        }
+        return null;
+
+    }
+    public static specialCards GetSpecialCardByName(ArrayList<specialCards> cards, String name){
+        for (specialCards card : cards) {
+            if(card.getName().equals(name)){
+                return card;
+            }
+        }
+        return null;
+
     }
 
     public int getLevel() {

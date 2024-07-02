@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Femari_Project.iml" filepath="$PROJECT_DIR$/Femari_Project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/stronghold.iml" filepath="$PROJECT_DIR$/stronghold.iml" />
     </modules>
   </component>
 </project>
