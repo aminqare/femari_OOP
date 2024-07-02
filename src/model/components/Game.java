@@ -11,6 +11,7 @@ import java.util.Random;
 public class Game {
     private Player playerOne;
     private Player playerTwo;
+    private superGame superGame;
 
     public Random getRandom() {
         return random;
@@ -22,7 +23,16 @@ public class Game {
 
     private Random random = new Random();
 
+    public model.components.superGame getSuperGame() {
+        return superGame;
+    }
+
+    public void setSuperGame(model.components.superGame superGame) {
+        this.superGame = superGame;
+    }
+
     public Game(superGame superGame) {
+        this.superGame=superGame;
         this.playerOne = superGame.getPlayerOne();
         this.playerTwo = superGame.getPlayerTwo();
         addRandCards(playerOne);

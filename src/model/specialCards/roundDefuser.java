@@ -21,7 +21,7 @@ public class roundDefuser extends specialCards{
         }
     }
     public void run(Game game){
-        if(superGame.getRound()>0)
-        superGame.setRound(superGame.getRound()-1);
+        if(game.getSuperGame().getRound()>0)
+        game.getSuperGame().setRound(game.getSuperGame().getRound()-1);
     }
 }

@@ -8,7 +8,9 @@ import controller.signUpMenuController;
 import controller.mainMenuController;
 import model.UsersDB;
 import model.cards.cards;
+import model.components.Player;
 import model.components.User;
+import model.components.superGame;
 import model.specialCards.builder;
 
 import java.io.FileNotFoundException;
@@ -20,15 +22,20 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 
 import model.specialCards.builder;
+import model.utils.StringParser;
 
 import static controller.menuController.getJSONRegexMatcher;
+import static controller.menuController.usernameExists;
+import static controller.signUpMenuController.authenticate;
+import static controller.signUpMenuController.setCurrentUser;
 
 public class mainMenuView extends menuView {
 
     private static String pathToRegexJSON = "src/Regex/MainMenuRegex.json";
 
     public static void run(User currentUser, Scanner scanner) {
-
+        int failedAttempts = 0;
+        long nextAttemptTime = 0;
 
         mainMenuController.welcome(currentUser);
 
@@ -43,20 +50,22 @@ public class mainMenuView extends menuView {
 
         if (currentUser.getLevel() == 0) {
             mainMenuController.StartPack(new Random(), currentUser);
-            currentUser.setLevel(currentUser.getLevel()+1);
+            currentUser.setLevel(currentUser.getLevel() + 1);
             updateDB(currentUser);
             System.out.println("start pack");
         }
 
         while (true) {
+            long currentTime = System.currentTimeMillis();
             String command = input(scanner).trim();
 
-            Matcher startGameMatcher = getJSONRegexMatcher(command, "startNewGame", MainMenuRegexObj);
+
             Matcher loadGameMatcher = getJSONRegexMatcher(command, "loadGame", MainMenuRegexObj);
             Matcher profileMenuMatcher = getJSONRegexMatcher(command, "profileMenu", MainMenuRegexObj);
             Matcher ShowCardsMatcher = getJSONRegexMatcher(command, "showCards", MainMenuRegexObj);
             Matcher startNewGame = getJSONRegexMatcher(command, "enterGameMenu", MainMenuRegexObj);
             Matcher enterShopMenu = getJSONRegexMatcher(command, "enterShopMenu", MainMenuRegexObj);
+
 
             if (command.matches("\\s*exit\\s*")) {
                 Output("exit");
@@ -87,22 +96,42 @@ public class mainMenuView extends menuView {
                 signUpLoginView.run(scanner);
                 break;
 
-            }
-            else if (profileMenuMatcher.find()) {
+            } else if (profileMenuMatcher.find()) {
                 profileMenuView.run(scanner, currentUser);
 
             } else if (loadGameMatcher.find()) {
 
 
-            }else if(ShowCardsMatcher.find()){
-                Output("ShowCards",currentUser.getPlayerCards().toString(),currentUser.getPlayerSpecialCards().toString());
+            } else if (ShowCardsMatcher.find()) {
+                Output("ShowCards", currentUser.getPlayerCards().toString(), currentUser.getPlayerSpecialCards().toString());
+
+            } else if (startNewGame.find()) {
+                boolean IsBetting = IsBetting(scanner);
+                if (IsBetting) {
+                    if (currentUser.getGold() < 50) {
+                        Output("NotEnoughGold");
+                        IsBetting = IsBetting(scanner);
+                    }
+                }
+                Output("SecondPlayerLogin");
+                User otherUser = loginSecondUser( currentUser, failedAttempts, nextAttemptTime, currentTime,scanner);
+
+                    Player playerOne;
+                    Player otherPlayer;
+                    mainMenuView.Output("OtherUserLogin");
+                    playerOne = chooseCharacter("One", scanner, currentUser);
+                    otherPlayer = chooseCharacter("Two", scanner, otherUser);
+                    superGame superGame = new superGame(playerOne, otherPlayer, IsBetting);
+                    GameMenuView.run(superGame, scanner);
+
+
 
             } else {
                 Output("invalid");
             }
         }
-
     }
+
 
     public static void Output(String code, Object... params) {
         String pathToJSON = "src/response/MainMenuResponses.json";
@@ -114,15 +143,113 @@ public class mainMenuView extends menuView {
             return "";
         return scanner.nextLine();
     }
-    public static void updateDB(User currentUser){
-        UsersDB.usersDB.update(currentUser);
-        try {
-            UsersDB.usersDB.toJSON();
-        } catch (
-                IOException e) {
-            throw new RuntimeException(e);
+
+    public static Player chooseCharacter(String PlayerNumber, Scanner scanner, User currentUser) {
+        while (true) {
+            Output("ChoseCharacter" + PlayerNumber);
+            String character = scanner.nextLine();
+            if (character.equals("Amin") || character.equals("Mobina") || character.equals("Moca") || character.equals("Nane kian")) {
+                return new Player(currentUser, character);
+            } else {
+                Output("InvalidCharacter");
+                continue;
+            }
         }
     }
 
+    public static User loginSecondUser( User currentUser, int failedAttempts,
+                                       long nextAttemptTime, long currentTime,Scanner scanner) {
+        User otherUser;
+        JsonElement regexElement = null;
+        try {
+            regexElement = JsonParser.parseReader(new FileReader(pathToRegexJSON));
+        } catch (
+                FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        JsonObject MainMenuRegexObj = regexElement.getAsJsonObject();
 
-}
+        while (true) {
+            String command = input(scanner).trim();
+            Matcher loginSecondPlayer = getJSONRegexMatcher(command, "loginSecondPlayer", MainMenuRegexObj);
+            System.out.println("tuyi");
+            if (loginSecondPlayer.find()) {
+                System.out.println("kir");
+                String username = StringParser.removeQuotes(loginSecondPlayer.group("username"));
+                String password = StringParser.removeQuotes(loginSecondPlayer.group("pass"));
+
+                if (username == null) {
+                    signUpLoginView.output("registerusername404");
+                    continue;
+                } else if (password == null) {
+                    signUpLoginView.output("registerpassword404");
+                    continue;
+                } else if (!usernameExists(username)) {
+                    signUpLoginView.output("usernotfound");
+                    continue;
+                } else if (currentUser.getUsername().equals(username)) {
+                    Output("sameUser");
+                    continue;
+                } else {
+
+                    boolean userAuthenticated = authenticate(username, password);
+
+                    if (!userAuthenticated) {
+                        if (currentTime < nextAttemptTime) {
+                            long waitTime = (nextAttemptTime - currentTime) / 1000;
+                            System.out.println("Try again in " + waitTime + " seconds");
+
+                        } else {
+                            failedAttempts++;
+                            signUpLoginView.output("unmatchingpassanduser");
+                            nextAttemptTime = System.currentTimeMillis() + (long) failedAttempts * 5 * 1000;
+                            System.out.println("Try again in " + 5 * failedAttempts + " seconds");
+                        }
+                        continue;
+
+                    } else {
+                        otherUser = UsersDB.usersDB.getUserByUsername(username);
+                        if (otherUser.getGold() < 50) {
+                            Output("NotEnoughGold2");
+                            continue;
+                        } else {
+                            return otherUser;
+                        }
+                    }
+                }
+            }else {
+                Output("invalid");
+            }
+        }
+
+    }
+
+
+        public static boolean IsBetting (Scanner scanner){
+
+            while (true) {
+                Output("ChooseGameMode");
+                String Mode = scanner.nextLine();
+                if (Mode.equals("Betting Mode")) {
+                    return true;
+                } else if (Mode.equals("Duo Mode")) {
+                    return false;
+                } else {
+                    Output("InvalidMode");
+                }
+            }
+
+        }
+
+        public static void updateDB (User currentUser){
+            UsersDB.usersDB.update(currentUser);
+            try {
+                UsersDB.usersDB.toJSON();
+            } catch (
+                    IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+
+    }
