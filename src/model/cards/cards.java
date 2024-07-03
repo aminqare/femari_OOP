@@ -17,6 +17,7 @@ public class cards {
     private int level;
     private double upgradeCost;
 
+
     public cards(String name, double defence, double attack, int duration, double damage, int level, double upgradeCost) {
         this.name = name;
         this.defence = defence;

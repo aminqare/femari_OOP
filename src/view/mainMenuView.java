@@ -30,12 +30,13 @@ import static controller.signUpMenuController.authenticate;
 import static controller.signUpMenuController.setCurrentUser;
 
 public class mainMenuView extends menuView {
-
+   public static boolean IsBetting=false;
     private static String pathToRegexJSON = "src/Regex/MainMenuRegex.json";
 
     public static void run(User currentUser, Scanner scanner) {
         int failedAttempts = 0;
         long nextAttemptTime = 0;
+
 
         mainMenuController.welcome(currentUser);
 
@@ -109,7 +110,7 @@ public class mainMenuView extends menuView {
                 shopMenuView.run(scanner, currentUser);
 
             } else if (startNewGame.find()) {
-                boolean IsBetting = IsBetting(scanner);
+                 IsBetting = IsBetting(scanner);
                 if (IsBetting) {
                     if (currentUser.getGold() < 50) {
                         Output("NotEnoughGold");
@@ -212,9 +213,11 @@ public class mainMenuView extends menuView {
 
                     } else {
                         otherUser = UsersDB.usersDB.getUserByUsername(username);
+                        if(IsBetting){
                         if (otherUser.getGold() < 50) {
                             Output("NotEnoughGold2");
                             continue;
+                        }
                         } else {
                             return otherUser;
                         }

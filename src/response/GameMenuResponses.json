@@ -2,7 +2,7 @@
   "Turn": "INFO: first turn is for $VAR1$",
   "playerDeck": "YOUR CARDS:\nAttack/Defence Cards: $VAR1$\nSpecialCards: $VAR2$",
   "selectedSpecialCard": "SPECIALCARD INFO:\nname: $VAR1$",
-  "selectedCard": "CARD INFO:\nname: $VAR1$\nLevel: $VAR2$\nCard Attack: $VAR3$\nCard Defence: $VAR4$",
+  "selectedCard": "CARD INFO:\nname: $VAR1$\nLevel: $VAR2$\nCard Attack: $VAR3$\nCard Defence: $VAR4$\nCard Damage: $VAR5$",
   "selectionSuccess": "Success!: card selected successfully",
   "invalidMove": "Error!: invalid move",
   "invalid": "Error!: hmm.. I didn't get that"

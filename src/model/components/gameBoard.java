@@ -3,11 +3,13 @@ import model.CardsDB;
 import model.cards.cards;
 import model.specialCards.specialCards;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class gameBoard {
     ArrayList<String> Board = new ArrayList<>();
+    ArrayList<String> Type=new ArrayList<>(21);
 
     public gameBoard() {
         Random random = new Random();
@@ -32,60 +34,89 @@ public class gameBoard {
     public void ShowBoard(){
         for (String s : this.Board) {
             if(s.equals("0")){
-                System.out.print("\t| ");
+                System.out.print("\t|");
             }else if(s.equals("1")){
-                System.out.print("\t| ");
+                System.out.print("\t|");
             }else if(s.equals("Hole")){
-                System.out.print("\t| ");
+                System.out.print("\t|");
             }else if(s.equals("...")){
-                System.out.print("\t| ");
+                System.out.print("\t|");
             }else{
                 cards card = cards.GetCardByName(CardsDB.cardsDB.getCards(), s);
                 specialCards specialCard = specialCards.GetSpecialCardByName(specialCards.getGameSpecialCards(), s);
                 if(card==null){
-                    System.out.print("\t| ");
+                    System.out.print("\t|");
                 }else if(specialCard==null){
-                    System.out.print(card.getDamage() + "| ");
+                    System.out.print(card.getDamage() + "|");
                 }
             }
         }
         System.out.println();
         for (String s : this.Board) {
             if(s.equals("0")){
-                System.out.print("empty slot| ");
+                System.out.print("\t|");
             }else if(s.equals("1")){
-                System.out.print("unavailable slot| ");
+                System.out.print("unv|");
             }else if(s.equals("Hole")){
-                System.out.print("hole| ");
+                System.out.print("hole|");
             }else if(s.equals("...")){
-                System.out.print("filled with prev card| ");
+                System.out.print("...|");
             }else{
-                cards card = cards.GetCardByName(CardsDB.cardsDB.getCards(), s);
-                specialCards specialCard = specialCards.GetSpecialCardByName(specialCards.getGameSpecialCards(), s);
+                cards card = cards.GetCardByName(CardsDB.cardsDB.getCards(),s);
+                specialCards specialCard = specialCards.GetSpecialCardByName(specialCards.getGameSpecialCards(),s);
                 if(card==null){
-                    System.out.print(specialCard.getName() + "| ");
+                    System.out.print(specialCard.getName() + "|");
                 }else if(specialCard==null){
-                    System.out.print(card.getName() + "| ");
+                    System.out.print(card.getName() + "|");
                 }
             }
         }
         System.out.println();
         for (String s : this.Board) {
             if(s.equals("0")){
-                System.out.print("\t| ");
+                System.out.print("\t|");
             }else if(s.equals("1")){
-                System.out.print("\t| ");
+                System.out.print("\t|");
             }else if(s.equals("Hole")){
-                System.out.print("\t| ");
+                System.out.print("\t|");
             }else if(s.equals("...")){
-                System.out.print("\t| ");
+                System.out.print("\t|");
             }else{
                 cards card = cards.GetCardByName(CardsDB.cardsDB.getCards(), s);
                 specialCards specialCard = specialCards.GetSpecialCardByName(specialCards.getGameSpecialCards(), s);
                 if(card==null){
-                    System.out.print("\t| ");
+                    System.out.print("\t|");
                 }else if(specialCard==null){
-                    System.out.print(card.getDefence() + " / "+ card.getAttack() + "| ");
+                    System.out.print(card.getDefence() + " / "+ card.getAttack() + "|");
+                }
+            }
+        }
+
+    }
+
+    public ArrayList<String> getType() {
+        return Type;
+    }
+
+    public void setType(ArrayList<String> type) {
+        Type = type;
+    }
+
+    public void UpdateType(){
+        for (int i = 0; i < this.Board.size(); i++) {
+            if(Board.get(i).equals("0")){
+                Type.set(i,"empty");
+            }else if(Board.get(i).equals("1")){
+                Type.set(i,"unv");
+            }else if(Board.get(i).equals("Hole")){
+                Type.set(i,"hole");
+            }else{
+                cards card = cards.GetCardByName(CardsDB.cardsDB.getCards(), Board.get(i));
+                specialCards specialCard = specialCards.GetSpecialCardByName(specialCards.getGameSpecialCards(), Board.get(i));
+                if(card==null){
+                    Type.set(i,"specialCards");
+                }else if(specialCard==null){
+                    Type.set(i,"cards");
                 }
             }
         }
