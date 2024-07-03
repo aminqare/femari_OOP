@@ -3,7 +3,7 @@ package model.components;
 import java.util.Date;
 
 public class superGame {
-    private  int Round=4;
+    private  int Round;
     private Player playerOne;
     private Player playerTwo;
     private String winner;
@@ -35,6 +35,7 @@ public class superGame {
     }
 
     public superGame(Player playerOne, Player playerTwo,boolean IsBetting) {
+        this.Round=1;
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
         this.IsBetting=IsBetting;
