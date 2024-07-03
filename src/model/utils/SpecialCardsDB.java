@@ -5,7 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import model.CardsDB;
 import model.cards.cards;
-import model.specialCards.specialCards;
+import model.specialCards.*;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -54,6 +54,7 @@ public class SpecialCardsDB implements Serializable {
         this.specialCards.add(card);
     }
 
+
     public specialCards getCardByName(String name){
         for(specialCards card: this.specialCards){
             if(card.getName().equals(name)){
@@ -62,6 +63,7 @@ public class SpecialCardsDB implements Serializable {
         }
         return null;
     }
+
 
     public List<specialCards> getCards() {
         return specialCards;

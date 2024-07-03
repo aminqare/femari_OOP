@@ -2,12 +2,16 @@ package model.specialCards;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import model.cards.cards;
 import model.components.User;
+import model.utils.SpecialCardsDB;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class specialCards implements Serializable {
@@ -15,6 +19,34 @@ public abstract class specialCards implements Serializable {
     private int level=1;
     private int duration;
     private double price;
+    private static ArrayList<specialCards> gameSpecialCards = new ArrayList<>(){{
+        add(new shield()) ;
+        add(new roundDefuser()) ;
+        add(new powerade());
+        add(new powerade());
+        add(new oppsCardDefuser());
+        add(new mole());
+        add(new mehradHidden());
+        add(new heal());
+        add(new copyCat());
+        add(new cardSnatcher());
+        add(new builder());
+    }};
+    public static specialCards GetSpecialCardByName(List<specialCards> cards, String name){
+        for (specialCards card : cards) {
+            if(card.getName().equals(name)){
+                return card;
+            }
+        }
+        return null;
+    }
+    public static ArrayList<specialCards> getGameSpecialCards() {
+        return gameSpecialCards;
+    }
+
+    public void setGameSpecialCards(ArrayList<specialCards> gameSpecialCards) {
+        this.gameSpecialCards = gameSpecialCards;
+    }
 
     public double getPrice() {
         return price;
@@ -50,9 +82,10 @@ public abstract class specialCards implements Serializable {
         this.name = name;
     }
 
+
     @Override
     public String toString() {
-        String output="Name: "+this.getName()+" Level: "+String.valueOf(this.getLevel())+" Duration: "+String.valueOf(this.getDuration())+"\n";
+        String output="Name: "+this.getName()+" Level: "+String.valueOf(this.getLevel())+" Duration: "+String.valueOf(this.getDuration())+" Upgrade Price: " +String.valueOf(this.getPrice()) + "\n";
         return output;
     }
 

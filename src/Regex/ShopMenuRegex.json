@@ -1,0 +1,5 @@
+{
+  "showCards": "^\\s*show\\s+cards\\s*$",
+  "selectionUpdate": "^\\s*update\\s+card\\s+(?<name>\\\"[^\\\"]+\\\"|\\S+)\\s*$",
+  "selectionBuy": "^\\s*buy\\s+card\\s+(?<name>\\\"[^\\\"]+\\\"|\\S+)\\s*$"
+}
