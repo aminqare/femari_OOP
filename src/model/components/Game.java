@@ -35,8 +35,8 @@ public class Game {
         this.superGame=superGame;
         this.playerOne = superGame.getPlayerOne();
         this.playerTwo = superGame.getPlayerTwo();
-        addRandCards(playerOne);
-        addRandCards(playerTwo);
+        addRandCards(superGame.getPlayerOne());
+        addRandCards(superGame.getPlayerTwo());
     }
 
     public Player getPlayerOne() {
@@ -59,12 +59,12 @@ public class Game {
         ArrayList<cards> cards = player.getPlayerCards();
         ArrayList<specialCards> specialCards = player.getPlayerSpecialCards();
         for (int i = 0; i < 5; i++) {
-            double randomIndex = random.nextDouble(1);
+            double randomIndex = Math.abs(random.nextDouble(1));
             if (randomIndex < 0.7) {
-                int randomIndexForCards = random.nextInt(cards.size());
+                int randomIndexForCards = Math.abs(random.nextInt(cards.size()));
                 player.getPlayerCardsDeck().add(cards.get(randomIndexForCards));
             } else {
-                int randomIndexForSpecialCards = random.nextInt(specialCards.size());
+                int randomIndexForSpecialCards = Math.abs(random.nextInt(specialCards.size()));
                 player.getPlayerSpecialCardsDeck().add(specialCards.get(randomIndexForSpecialCards));
             }
         }

@@ -7,9 +7,20 @@ import java.util.ArrayList;
 
 public class Player extends User{
     private double damage;
+    private boolean IsFirstPlayer=false;
+
+    public boolean isFirstPlayer() {
+        return IsFirstPlayer;
+    }
+
+    public void setFirstPlayer(boolean firstPlayer) {
+        IsFirstPlayer = firstPlayer;
+    }
+
     private double HP;
     private String character;
     private int rounds;
+    private User user;
     private ArrayList<cards> playerCardsDeck = new ArrayList<cards>();
     private ArrayList<specialCards> playerSpecialCardsDeck = new ArrayList<specialCards>();
     private boolean IsTurn=false;
@@ -51,6 +62,17 @@ public class Player extends User{
         this.HP = 100;
         this.character = character;
         this.rounds = 4;
+        this.user = user;
+        this.setPlayerCards(user.getPlayerCards());
+        this.setPlayerSpecialCards(user.getPlayerSpecialCards());
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public ArrayList<cards> getPlayerCardsDeck() {

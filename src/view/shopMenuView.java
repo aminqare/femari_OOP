@@ -56,7 +56,8 @@ public class shopMenuView {
                             shopMenuView.output("notEnoughMoney");
                         }
                         else{
-                            specialCard.setLevel(specialCard.getLevel()+1);
+                            User.GetSpecialCardByName(currentUser.getPlayerSpecialCards(),name)
+                                    .setLevel(specialCard.getLevel()+1);
                             currentUser.setGold(currentUser.getGold() - specialCard.getPrice());
                             shopMenuView.output("successfulUpdate");
                         }
@@ -71,8 +72,8 @@ public class shopMenuView {
                             shopMenuView.output("notEnoughMoney");
                         }
                         else{
-                            card.powerUp();
-                            card.setLevel(card.getLevel() + 1);
+                            User.GetCardByName(currentUser.getPlayerCards(), name).powerUp();
+                            User.GetCardByName(currentUser.getPlayerCards(), name).setLevel(card.getLevel() + 1);
                             currentUser.setGold(currentUser.getGold() - card.getUpgradeCost());
                             shopMenuView.output("successfulUpdate");
                         }

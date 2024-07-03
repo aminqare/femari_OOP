@@ -9,6 +9,24 @@ public class superGame {
     private String winner;
     private String loser;
     private Date date;
+    private Game currentGame;
+
+    public Game getCurrentGame() {
+        return currentGame;
+    }
+
+    public void setCurrentGame(Game currentGame) {
+        this.currentGame = currentGame;
+    }
+
+    public boolean isBetting() {
+        return IsBetting;
+    }
+
+    public void setBetting(boolean betting) {
+        IsBetting = betting;
+    }
+
     private boolean IsBetting;
     public int getRound() {
         return this.Round;

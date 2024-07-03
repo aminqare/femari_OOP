@@ -38,6 +38,10 @@ public class User implements Serializable {
         return playerCards;
     }
 
+    public void setPlayerCards(ArrayList<cards> playerCards) {
+        this.playerCards = playerCards;
+    }
+
     public ArrayList<specialCards> getPlayerSpecialCards() {
         return playerSpecialCards;
     }

@@ -106,7 +106,6 @@ public class mainMenuView extends menuView {
                 Output("ShowCards", currentUser.getPlayerCards().toString(), currentUser.getPlayerSpecialCards().toString());
 
             } else if(enterShopMenu.find()){
-                System.out.println("kir");
                 shopMenuView.run(scanner, currentUser);
 
             } else if (startNewGame.find()) {
