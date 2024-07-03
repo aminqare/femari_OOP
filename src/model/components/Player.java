@@ -7,6 +7,16 @@ import java.util.ArrayList;
 
 public class Player extends User{
     private double damage;
+    private boolean IsFirstPlayer=false;
+
+    public boolean isFirstPlayer() {
+        return IsFirstPlayer;
+    }
+
+    public void setFirstPlayer(boolean firstPlayer) {
+        IsFirstPlayer = firstPlayer;
+    }
+
     private double HP;
     private String character;
     private int rounds;
