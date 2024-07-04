@@ -23,6 +23,6 @@ public heal(){
     }
     public static void run(Game game){
         Player player=game.getCurrentPlayer();
-        player.IncreaseHP();
+        //player.IncreaseHP();
     }
 }

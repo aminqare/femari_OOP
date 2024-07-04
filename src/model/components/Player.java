@@ -24,7 +24,7 @@ public class Player extends User{
     private ArrayList<cards> playerCardsDeck = new ArrayList<cards>();
     private ArrayList<specialCards> playerSpecialCardsDeck = new ArrayList<specialCards>();
     private boolean IsTurn=false;
-    private gameBoard gameBoard=new gameBoard();
+    private gameBoard gameBoard;
 
     public boolean isHasMehradHidden() {
         return hasMehradHidden;
@@ -59,9 +59,9 @@ public class Player extends User{
     public Player(User user, String character) {
         super(user.getUsername(), user.getPassword(), user.getNickname(), user.getEmail(), user.getPasswordRecoveryQuestion(), user.getPasswordRecoveryAnswer());
         this.damage = 0;
-        this.HP = 100;
+        this.HP = 1000;
         this.character = character;
-        this.rounds = 4;
+        this.rounds = 2;
         this.user = user;
         this.setPlayerCards(user.getPlayerCards());
         this.setPlayerSpecialCards(user.getPlayerSpecialCards());
@@ -125,4 +125,5 @@ public class Player extends User{
     public void IncreaseHP(){
         this.setHP(this.getHP()*1.5);
     }
+
 }

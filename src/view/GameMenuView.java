@@ -44,7 +44,28 @@ public class GameMenuView extends menuView {
             Matcher showDeck = getJSONRegexMatcher(command, "showDeck", GameMenuRegexObj);
             Matcher cartSelection = getJSONRegexMatcher(command, "cartSelection", GameMenuRegexObj);
             Matcher PlaceCard = getJSONRegexMatcher(command, "PlaceCard", GameMenuRegexObj);
+//if(currentSuperGame.getCurrentGame().getCurrentPlayer().getRounds()<4 &&currentSuperGame.getCurrentGame().getCurrentEnemy().getRounds()<4){
+//    if(notFull(currentSuperGame.getCurrentGame().getCurrentPlayer().getGameBoard().getBoard())){
+//        Game game = currentSuperGame.getCurrentGame();
+//        Player player = game.getCurrentEnemy();
+//        ArrayList<cards> cards = player.getPlayerCards();
+//        ArrayList<specialCards> specialCards = player.getPlayerSpecialCards();
+//        double randomIndex = Math.abs(game.getRandom().nextDouble(1));
+//        if (randomIndex < 0.7) {
+//            int randomIndexForCards = Math.abs(game.getRandom().nextInt(cards.size()));
+//            player.getPlayerCardsDeck().add(cards.get(randomIndexForCards));
+//        } else {
+//            int randomIndexForSpecialCards = Math.abs(game.getRandom().nextInt(specialCards.size()));
+//            player.getPlayerSpecialCardsDeck().add(specialCards.get(randomIndexForSpecialCards));
+//        }
+//    }
+//    System.out.println(currentSuperGame.getCurrentGame().getCurrentEnemy().getUsername() + "is receiving bonus");
+//}
+if(currentSuperGame.getCurrentGame().getPlayerOne().getRounds() == 0 && currentSuperGame.getCurrentGame().getPlayerTwo().getRounds() == 0){
+    GameMenuView.Output("timeLine");
+    timeLineMenu.run(currentSuperGame, scanner);
 
+}
             if (command.matches("\\s*exit\\s*")) {
                 Output("exit");
                 System.exit(0);
@@ -124,18 +145,18 @@ public class GameMenuView extends menuView {
                                 if(temp==null){
                                     enemyPlayer.getGameBoard().getBoard().set(i, "Hole");
                                     player.getGameBoard().getBoard().set(i, "Hole");
-                                    player.setHP(player.getHP() + (enemyCard.getDamage() / enemyCard.getDuration()));
+                                    //player.setHP(player.getHP() + (enemyCard.getDamage() / enemyCard.getDuration()));
                                 } else if (temp.getUsername().equals(player.getUsername())) {
                                     enemyPlayer.getGameBoard().getBoard().set(i, "Hole");
                                     player.getGameBoard().getBoard().add(i, selectedCard.getName());
-                                    enemyPlayer.setHP(enemyPlayer.getHP() - (selectedCard.getDamage() / selectedCard.getDuration()));
-                                    player.setHP(player.getHP() + (enemyCard.getDamage() / enemyCard.getDuration()));
+                                    //enemyPlayer.setHP(enemyPlayer.getHP() - (selectedCard.getDamage() / selectedCard.getDuration()));
+                                    //player.setHP(player.getHP() + (enemyCard.getDamage() / enemyCard.getDuration()));
                                 } else if (temp.getUsername().equals(enemyPlayer.getUsername())) {
                                     player.getGameBoard().getBoard().set(i, "Hole");
-                                    player.setHP(player.getHP() - (enemyCard.getDamage() / enemyCard.getDuration()));
+                                    //player.setHP(player.getHP() - (enemyCard.getDamage() / enemyCard.getDuration()));
                                 }
                             }else {
-                                enemyPlayer.setHP(enemyPlayer.getHP() - (selectedCard.getDamage() / selectedCard.getDuration()));
+                                //enemyPlayer.setHP(enemyPlayer.getHP() - (selectedCard.getDamage() / selectedCard.getDuration()));
                                     player.getGameBoard().getBoard().add(i, selectedCard.getName());
 
                             }
@@ -204,6 +225,17 @@ public class GameMenuView extends menuView {
     public static void switchTurns(Game game) {
         Player player = game.getCurrentPlayer();
         Player enemy = game.getCurrentEnemy();
+        ArrayList<cards> cards = player.getPlayerCards();
+        ArrayList<specialCards> specialCards = player.getPlayerSpecialCards();
+            double randomIndex = Math.abs(game.getRandom().nextDouble(1));
+            if (randomIndex < 0.7) {
+                int randomIndexForCards = Math.abs(game.getRandom().nextInt(cards.size()));
+                player.getPlayerCardsDeck().add(cards.get(randomIndexForCards));
+            } else {
+                int randomIndexForSpecialCards = Math.abs(game.getRandom().nextInt(specialCards.size()));
+                player.getPlayerSpecialCardsDeck().add(specialCards.get(randomIndexForSpecialCards));
+            }
+
         player.setTurn(false);
         enemy.setTurn(true);
     }
@@ -223,7 +255,7 @@ public class GameMenuView extends menuView {
 
     public static ArrayList<Integer> intract(cards playedCard, Player enemy, int BlockIndex) {
         ArrayList<Integer> Temp = new ArrayList<>();
-        for (int i = BlockIndex; i < BlockIndex + playedCard.getDuration(); i++) {
+        for (int i = BlockIndex; i < BlockIndex + playedCard.getDuration()+1; i++) {
             if (enemy.getGameBoard().getType().get(i).equals("cards")) {
                 Temp.add(i);
             }
@@ -232,7 +264,7 @@ public class GameMenuView extends menuView {
     }
     public static ArrayList<Integer> intractSpecial(specialCards playedCard, Player enemy, int BlockIndex) {
         ArrayList<Integer> Temp = new ArrayList<>();
-        for (int i = BlockIndex; i < BlockIndex + playedCard.getDuration(); i++) {
+        for (int i = BlockIndex; i < BlockIndex + playedCard.getDuration()+1; i++) {
             if (enemy.getGameBoard().getType().get(i).equals("specialCards")) {
                 Temp.add(i);
             }
@@ -251,12 +283,24 @@ if(cardName.equals("sheild")){
     }
 }else{
     specialCards.GetSpecialCardByName(specialCards.getGameSpecialCards(), cardName).run(game);
-    for (int i =BlockIndex; i < BlockIndex+1+ card.getDuration(); i++) {
+    for (int i =BlockIndex; i < BlockIndex+ card.getDuration(); i++) {
         game.getCurrentPlayer().getGameBoard().getBoard().add(i, card.getName());
     }
 }
 
 
+    }
+    public static boolean notFull(ArrayList<String> board){
+        for (int i = 0; i < board.size(); i++) {
+            if(board.get(i).equals("0")||board.get(i).equals("1")||board.get(i).equals("Hole")){
+                continue;
+            }
+            else{
+                return false;
+            }
+
+        }
+        return true;
     }
 }
 

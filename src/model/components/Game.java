@@ -35,6 +35,8 @@ public class Game {
         this.superGame=superGame;
         this.playerOne = superGame.getPlayerOne();
         this.playerTwo = superGame.getPlayerTwo();
+        this.playerOne.setGameBoard(new gameBoard());
+        this.playerTwo.setGameBoard(new gameBoard());
         addRandCards(superGame.getPlayerOne());
         addRandCards(superGame.getPlayerTwo());
     }
