@@ -33,7 +33,7 @@ public class powerade extends specialCards {
                tempCards.add(cards.GetCardByName(player.getPlayerCardsDeck(),s));
             }
         }
-        int randomIndex = game.getRandom().nextInt(tempCards.size());
+        int randomIndex = Math.abs(game.getRandom().nextInt(tempCards.size()));
         cards card = tempCards.get(randomIndex);
         card.powerUp();
     }

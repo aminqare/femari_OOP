@@ -84,21 +84,17 @@ public class UsersDB implements Serializable {
     }
 
     public void update(User user){
-        for(User iter: this.users){
-            if(user.equals(user)){
-                iter = user;
+        for(int i = 0; i < this.users.size(); i++){
+            if(this.users.get(i).getUsername().equals(user.getUsername())){
+                this.users.set(i, user);
                 return;
             }
         }
     }
 
     public List<User> sortByScore() {
-        List<User> users = this.users;
-        Collections.sort(users, new Comparator<User>() {
-            public int compare(User u1, User u2) {
-                return u2.getScore() - u1.getScore();
-            }
-        });
+        List<User> users = new ArrayList<>(this.users);
+        users.sort(Comparator.comparingInt(User::getScore).reversed());
         return users;
     }
 
@@ -112,12 +108,11 @@ public class UsersDB implements Serializable {
     }
 
     public void updateByOldUser(User oldUser, User newUser) {
-        for (User iter : users) {
-            if (iter.getUsername().equals(oldUser.getUsername())) {
-                iter.set(newUser);
+        for (int i = 0; i < this.users.size(); i++) {
+            if (this.users.get(i).getUsername().equals(oldUser.getUsername())) {
+                this.users.set(i, newUser);
                 return;
             }
         }
     }
 }
-

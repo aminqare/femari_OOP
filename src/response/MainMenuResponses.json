@@ -11,5 +11,6 @@
   "ChooseGameMode": "Choose Game Mode:\n1.Duo Mode\n2.Betting Mode",
   "NotEnoughGold": "You don't have enough gold for betting",
   "NotEnoughGold2": "Second Player,You don't have enough gold for betting",
-  "SecondPlayerLogin": "Second player, please login now"
+  "SecondPlayerLogin": "Second player, please login now",
+  "gameHistory": "INFO: your game history is\n$VAR1$"
 }

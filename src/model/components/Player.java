@@ -21,8 +21,8 @@ public class Player extends User{
     private String character;
     private int rounds;
     private User user;
-    private ArrayList<cards> playerCardsDeck = new ArrayList<cards>();
-    private ArrayList<specialCards> playerSpecialCardsDeck = new ArrayList<specialCards>();
+    private ArrayList<cards> playerCardsDeck;
+    private ArrayList<specialCards> playerSpecialCardsDeck;
     private boolean IsTurn=false;
     private gameBoard gameBoard;
 
@@ -59,7 +59,7 @@ public class Player extends User{
     public Player(User user, String character) {
         super(user.getUsername(), user.getPassword(), user.getNickname(), user.getEmail(), user.getPasswordRecoveryQuestion(), user.getPasswordRecoveryAnswer());
         this.damage = 0;
-        this.HP = 1000;
+        this.HP = 20;
         this.character = character;
         this.rounds = 2;
         this.user = user;

@@ -18,11 +18,11 @@ long startTime=System.currentTimeMillis();
             Player playerOne = currentSuperGame.getPlayerOne();
             Player playerTwo = currentSuperGame.getPlayerTwo();
             long currentTime=System.currentTimeMillis();
-            if(playerOne.getHP() == 0 || playerTwo.getHP() == 0){
-                if(playerOne.getHP() == 0){
+            if(playerOne.getHP() <= 0 || playerTwo.getHP() <= 0){
+                if(playerOne.getHP() <= 0){
                 endGameView.run(currentSuperGame, scanner, playerTwo);
                 }
-                else if(playerTwo.getHP() == 0){
+                else if(playerTwo.getHP() <= 0){
                     endGameView.run(currentSuperGame, scanner, playerOne);
                 }
             }
@@ -67,7 +67,7 @@ long startTime=System.currentTimeMillis();
                     timeLineMenu.Output("cards", "Heal", card.getName());
                 }
                 else{
-                    String specialCard = "specialCard";
+                    String specialCard = "specialCards";
                     String card = "cards";
                     String cardOne;
                     String cardTwo;

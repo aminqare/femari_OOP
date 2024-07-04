@@ -18,7 +18,10 @@ public class User implements Serializable {
     private String passwordRecoveryAnswer;
     private ArrayList<cards> playerCards;
     private ArrayList<specialCards> playerSpecialCards;
+    private ArrayList<gameHistory> gameHistory;
     private int score;
+    private int XP;
+    private int maxXP;
 
     public User(String username, String password, String nickname, String email, int passwordRecoveryQuestion, String passwordRecoveryAnswer) {
         this.username = username;
@@ -32,6 +35,8 @@ public class User implements Serializable {
         this.gold = 20;
         this.level = 0;
         this.score = 0;
+        this.XP = 0;
+        this.setGameHistory(new ArrayList<>());
     }
 
     public ArrayList<cards> getPlayerCards() {
@@ -40,6 +45,22 @@ public class User implements Serializable {
 
     public void setPlayerCards(ArrayList<cards> playerCards) {
         this.playerCards = playerCards;
+    }
+
+    public int getXP() {
+        return XP;
+    }
+
+    public void setXP(int XP) {
+        this.XP = XP;
+    }
+
+    public int getMaxXP() {
+        return maxXP;
+    }
+
+    public void setMaxXP() {
+        this.maxXP = this.level * 120;
     }
 
     public ArrayList<specialCards> getPlayerSpecialCards() {
@@ -163,6 +184,14 @@ public class User implements Serializable {
                 this.getPasswordRecoveryQuestion(), this.getPasswordRecoveryAnswer());
         cloneUser.setScore(this.getScore());
         return cloneUser;
+    }
+
+    public ArrayList<model.components.gameHistory> getGameHistory() {
+        return gameHistory;
+    }
+
+    public void setGameHistory(ArrayList<model.components.gameHistory> gameHistory) {
+        this.gameHistory = gameHistory;
     }
 
     public void set(User user){

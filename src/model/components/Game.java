@@ -37,6 +37,10 @@ public class Game {
         this.playerTwo = superGame.getPlayerTwo();
         this.playerOne.setGameBoard(new gameBoard());
         this.playerTwo.setGameBoard(new gameBoard());
+        this.playerOne.setPlayerCardsDeck(new ArrayList<>());
+        this.playerOne.setPlayerSpecialCardsDeck(new ArrayList<>());
+        this.playerTwo.setPlayerCardsDeck(new ArrayList<>());
+        this.playerTwo.setPlayerSpecialCardsDeck(new ArrayList<>());
         addRandCards(superGame.getPlayerOne());
         addRandCards(superGame.getPlayerTwo());
     }

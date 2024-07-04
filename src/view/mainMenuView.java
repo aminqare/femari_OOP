@@ -10,6 +10,7 @@ import model.UsersDB;
 import model.cards.cards;
 import model.components.Player;
 import model.components.User;
+import model.components.gameHistory;
 import model.components.superGame;
 import model.specialCards.builder;
 
@@ -17,8 +18,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Matcher;
 
 import model.specialCards.builder;
@@ -66,6 +66,7 @@ public class mainMenuView extends menuView {
             Matcher ShowCardsMatcher = getJSONRegexMatcher(command, "showCards", MainMenuRegexObj);
             Matcher startNewGame = getJSONRegexMatcher(command, "enterGameMenu", MainMenuRegexObj);
             Matcher enterShopMenu = getJSONRegexMatcher(command, "enterShopMenu", MainMenuRegexObj);
+            Matcher gameHistoryMatcher = getJSONRegexMatcher(command, "showGameHistory", MainMenuRegexObj);
 
 
             if (command.matches("\\s*exit\\s*")) {
@@ -130,7 +131,64 @@ public class mainMenuView extends menuView {
 
 
 
-            } else {
+            } else if(gameHistoryMatcher.find()){
+                String sortType = gameHistoryMatcher.group("name");
+                String format = gameHistoryMatcher.group("format");
+                if(sortType.equals("name")){
+                    currentUser.getGameHistory().sort(levelComparator);
+                    if(format.equals("normal")){
+                        for (int i = 0; i < currentUser.getGameHistory().size(); i++) {
+                            //System.out.println("kir");
+                            mainMenuView.Output("gameHistory", currentUser.getGameHistory().get(i).toString());
+                        }
+                    }
+                    else if(format.equals("reverse")){
+                        for (int i = currentUser.getGameHistory().size() - 1; i >= 0; i--) {
+                            mainMenuView.Output("gameHistory", currentUser.getGameHistory().get(i).toString());
+                        }
+                    }
+                }
+                else if(sortType.equals("level")){
+                    currentUser.getGameHistory().sort(levelComparator);
+                    if(format.equals("normal")){
+                        for (int i = 0; i < currentUser.getGameHistory().size(); i++) {
+                            mainMenuView.Output("gameHistory", currentUser.getGameHistory().get(i).toString());
+                        }
+                    }
+                    else if(format.equals("reverse")){
+                        for (int i = currentUser.getGameHistory().size() - 1; i >= 0; i--) {
+                            mainMenuView.Output("gameHistory", currentUser.getGameHistory().get(i).toString());
+                        }
+                    }
+                }
+                else if(sortType.equals("gameState")){
+                    currentUser.getGameHistory().sort(winLossComparator);
+                    if(format.equals("normal")){
+                        for (int i = 0; i < currentUser.getGameHistory().size(); i++) {
+                            mainMenuView.Output("gameHistory", currentUser.getGameHistory().get(i).toString());
+                        }
+                    }
+                    else if(format.equals("reverse")){
+                        for (int i = currentUser.getGameHistory().size() - 1; i >= 0; i--) {
+                            mainMenuView.Output("gameHistory", currentUser.getGameHistory().get(i).toString());
+                        }
+                    }
+                }
+                else{
+                    currentUser.getGameHistory().sort(dateComparator);
+                    if(format.equals("normal")){
+                        for (int i = 0; i < currentUser.getGameHistory().size(); i++) {
+                            mainMenuView.Output("gameHistory", currentUser.getGameHistory().get(i).toString());
+                        }
+                    }
+                    else if(format.equals("reverse")){
+                        for (int i = currentUser.getGameHistory().size() - 1; i >= 0; i--) {
+                            mainMenuView.Output("gameHistory", currentUser.getGameHistory().get(i).toString());
+                        }
+                    }
+                }
+            }
+            else {
                 Output("invalid");
             }
         }
@@ -256,6 +314,30 @@ public class mainMenuView extends menuView {
                 throw new RuntimeException(e);
             }
         }
+    static Comparator<gameHistory> levelComparator = new Comparator<gameHistory>() {
+        @Override
+        public int compare(gameHistory o1, gameHistory o2) {
+            return Integer.compare(o1.getOpponentLevel(), o2.getOpponentLevel());
+        }
+    };
+    Comparator<gameHistory> nameComparator = new Comparator<gameHistory>() {
+        @Override
+        public int compare(gameHistory o1, gameHistory o2) {
+            return CharSequence.compare(o1.getOpponentName(), o2.getOpponentName());
+        }
+    };
+    static Comparator<gameHistory> winLossComparator = new Comparator<gameHistory>() {
+        @Override
+        public int compare(gameHistory o1, gameHistory o2) {
+            return CharSequence.compare(o1.getGameState(), o2.getGameState());
+        }
+    };
+    static Comparator<gameHistory> dateComparator = new Comparator<gameHistory>() {
+        @Override
+        public int compare(gameHistory o1, gameHistory o2) {
+            return (o1.getGameDate().compareTo(o2.getGameDate()));
+        }
+    };
 
 
     }

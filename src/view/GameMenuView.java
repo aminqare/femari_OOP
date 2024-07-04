@@ -273,8 +273,8 @@ if(currentSuperGame.getCurrentGame().getPlayerOne().getRounds() == 0 && currentS
     }
     public static void runSpecialCards(Game game, specialCards card,int BlockIndex){
         String cardName = card.getName();
-if(cardName.equals("sheild")){
-    String oposite=game.getCurrentEnemy().getGameBoard().getBoard().get(BlockIndex);
+if(cardName.equals("shield")){
+    String oposite = game.getCurrentEnemy().getGameBoard().getBoard().get(BlockIndex);
     if(oposite.equals("0")||oposite.equals("1")){
         GameMenuView.Output("invalidMove");
     }else{
