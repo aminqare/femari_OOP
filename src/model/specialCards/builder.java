@@ -12,14 +12,14 @@ public class builder extends specialCards{
     }
 
     @Override
-    void run(Object param) {
+    public void run(Object param) {
         if(param instanceof Game){
             run((Game)param);
         }else{
             System.out.println("ridi");
         }
     }
-    public void run(Game game,int Index){
+    public static void run(Game game,int Index){
         Player player=game.getCurrentPlayer();
         if(player.getGameBoard().getBoard().get(Index).equals("Hole")){
             player.getGameBoard().getBoard().set(Index,"0");

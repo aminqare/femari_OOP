@@ -14,18 +14,18 @@ public mole(){
 }
 
     @Override
-    void run(Object param) {
+    public void run(Object param) {
         if(param instanceof Game){
             run((Game)param);
         }else{
             System.out.println("ridi");
         }
     }
-    public void run(Game game){
+    public static void run(Game game){
        ChangeHolePlace(game.getPlayerOne().getGameBoard().getBoard());
        ChangeHolePlace(game.getPlayerTwo().getGameBoard().getBoard());
     }
-    public void ChangeHolePlace(ArrayList<String> gameBoard){
+    public static void ChangeHolePlace(ArrayList<String> gameBoard){
         for(int i=0;i<gameBoard.size();i++){
             if(gameBoard.get(i).equals("Hole")){
                 for(int j=0;j<gameBoard.size();j++){

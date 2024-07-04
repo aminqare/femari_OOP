@@ -15,14 +15,14 @@ public oppsCardDefuser(){
     this.setPrice(110);
 }
     @Override
-    void run(Object param) {
+    public void run(Object param) {
         if(param instanceof Game){
             run((Game)param);
         }else{
             System.out.println("ridi");
         }
     }
-    public void run(Game game){
+    public static void run(Game game){
         Player enemy=game.getCurrentEnemy();
         ArrayList<cards> enemyCards=enemy.getPlayerCardsDeck();
         int randomIndex1=game.getRandom().nextInt(enemyCards.size());

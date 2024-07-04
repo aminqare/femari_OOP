@@ -16,7 +16,7 @@ public class powerade extends specialCards {
     }
 
     @Override
-    void run(Object param) {
+    public void run(Object param) {
         if (param instanceof Game) {
             run((Game) param);
         } else {
@@ -24,7 +24,7 @@ public class powerade extends specialCards {
         }
     }
 
-    public void run(Game game) {
+    public static void run(Game game) {
         Player player = game.getCurrentPlayer();
         ArrayList<cards> tempCards = new ArrayList<>();
         ArrayList<String> playerGameBoard = player.getGameBoard().getBoard();

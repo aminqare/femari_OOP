@@ -10,7 +10,7 @@ public  shield(){
 }
 
     @Override
-    void run(Object param) {
+    public void run(Object param) {
 
 
     }

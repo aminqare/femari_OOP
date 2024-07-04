@@ -14,14 +14,14 @@ public heal(){
 }
 
     @Override
-    void run(Object param) {
+    public void run(Object param) {
         if(param instanceof Game){
             run((Game)param);
         }else{
             System.out.println("ridi");
         }
     }
-    public void run(Game game){
+    public static void run(Game game){
         Player player=game.getCurrentPlayer();
         player.IncreaseHP();
     }

@@ -76,7 +76,7 @@ public abstract class specialCards implements Serializable {
         this.duration = duration;
     }
 
-    abstract void run(Object param);
+    public abstract void run(Object param);
 
     public void setName(String name) {
         this.name = name;

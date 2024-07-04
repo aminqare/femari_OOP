@@ -6,7 +6,7 @@ import model.components.Game;
 public class mehradHidden extends specialCards {
 
     @Override
-    void run(Object param) {
+    public void run(Object param) {
         if (param instanceof Game) {
             run((Game) param);
         } else {
@@ -14,12 +14,12 @@ public class mehradHidden extends specialCards {
         }
     }
     public  mehradHidden(){
-        this.setDuration(4);
+        this.setDuration(0);
         this.setName("mehrad Hidden");
         this.setPrice(42);
     }
 
-    public void run(Game game) {
+    public static void run(Game game) {
         game.getCurrentEnemy().setHasMehradHidden(true);
     }
 

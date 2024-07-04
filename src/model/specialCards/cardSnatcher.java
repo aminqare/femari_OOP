@@ -16,7 +16,7 @@ public class cardSnatcher extends specialCards {
     }
 
     @Override
-    void run(Object param) {
+    public void run(Object param) {
         if (param instanceof Game) {
             run((Game) param);
         } else {
@@ -24,7 +24,7 @@ public class cardSnatcher extends specialCards {
         }
     }
 
-    public void run(Game game) {
+    public static void run(Game game) {
         Player player = game.getCurrentPlayer();
         Player enemy = game.getCurrentEnemy();
         Double random = game.getRandom().nextDouble(1);
@@ -35,20 +35,20 @@ public class cardSnatcher extends specialCards {
         }
     }
 
-    public void moveCard(Player player, Player enemy, Random random) {
+    public static void moveCard(Player player, Player enemy, Random random) {
         ArrayList<cards> enemyCards = enemy.getPlayerCardsDeck();
-        if (enemyCards.size() != 0) {
+        if (!enemyCards.isEmpty()) {
             int Index = random.nextInt(enemyCards.size());
             player.getPlayerCardsDeck().add(enemyCards.get(Index));
             enemyCards.remove(Index);
-        } else if (enemy.getPlayerSpecialCardsDeck().size() != 0) {
+        } else if (!enemy.getPlayerSpecialCardsDeck().isEmpty()) {
             moveSpecialCard(player, enemy, random);
         } else {
             System.out.println("Enemy doesn't have any card");
         }
     }
 
-    public void moveSpecialCard(Player player, Player enemy, Random random) {
+    public static void moveSpecialCard(Player player, Player enemy, Random random) {
         ArrayList<specialCards> enemyCards = enemy.getPlayerSpecialCards();
         if (!enemyCards.isEmpty()) {
             int Index = random.nextInt(enemyCards.size());

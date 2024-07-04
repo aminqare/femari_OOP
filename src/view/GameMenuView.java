@@ -6,6 +6,7 @@ import com.google.gson.JsonParser;
 import model.CardsDB;
 import model.cards.cards;
 import model.components.*;
+import model.specialCards.builder;
 import model.specialCards.specialCards;
 
 import java.io.FileNotFoundException;
@@ -49,8 +50,12 @@ public class GameMenuView extends menuView {
                 System.exit(0);
             } else if (showDeck.find()) {
                 Player player = currentSuperGame.getCurrentGame().getCurrentPlayer();
-                GameMenuView.Output("playerDeck", player.getPlayerCardsDeck().toString(),
-                        player.getPlayerSpecialCardsDeck().toString());
+                if(!player.isHasMehradHidden()) {
+                    GameMenuView.Output("playerDeck", player.getPlayerCardsDeck().toString(),
+                            player.getPlayerSpecialCardsDeck().toString());
+                }else{
+                    GameMenuView.Output("playerDeck", "suck suck suck suck my dickkkkkkkkk", "you can't see these chicks in here");
+                }
             } else if (cartSelection.find()) {
                 Player player = currentSuperGame.getCurrentGame().getCurrentPlayer();
                 String cardDeckName = cartSelection.group("cardDeck");
@@ -81,18 +86,24 @@ public class GameMenuView extends menuView {
                 if (Objects.equals(cardDeckName, "specialCards")) {
                     specialCards selectedSpecialCard = player.getPlayerSpecialCardsDeck().get(numberCard - 1);
                     int duration = selectedSpecialCard.getDuration();
-                    if ((numberBlock - 2) + duration > 20) {
-                        GameMenuView.Output("invalidMove");
-                    } else if (!Objects.equals(player.getGameBoard().getBoard().get(numberBlock - 1), "0")) {
-                        GameMenuView.Output("invalidMove");
-                    } else {
-
-                        for (int i = numberBlock-1; i < numberBlock + selectedSpecialCard.getDuration(); i++) {
-                            player.getGameBoard().getBoard().add(i, selectedSpecialCard.getName());
-                        }
+                    if(Objects.equals(selectedSpecialCard.getName(), "builder")){
+                        builder.run(currentSuperGame.getCurrentGame(), (numberBlock - 1));
                         player.getPlayerSpecialCardsDeck().remove(selectedSpecialCard);
                         switchTurns(currentSuperGame.getCurrentGame());
-                        System.out.println(currentSuperGame.getCurrentGame().getCurrentPlayer().getUsername());
+                    }
+                    else{
+                        if ((numberBlock - 2) + duration > 20) {
+                            GameMenuView.Output("invalidMove");
+                        } else if (!Objects.equals(player.getGameBoard().getBoard().get(numberBlock - 1), "0")) {
+                            GameMenuView.Output("invalidMove");
+                        }else if(!intractSpecial(selectedSpecialCard, player, numberBlock - 1).isEmpty()){
+                            GameMenuView.Output("invalidMove");
+                        } else {
+                            runSpecialCards(currentSuperGame.getCurrentGame(),selectedSpecialCard,numberBlock - 1);
+                            player.getPlayerSpecialCardsDeck().remove(selectedSpecialCard);
+                            player.setRounds(player.getRounds() - 1);
+                            switchTurns(currentSuperGame.getCurrentGame());
+                        }
                     }
                 } else if (Objects.equals(cardDeckName, "cards")) {
                     cards selectedCard = player.getPlayerCardsDeck().get(numberCard - 1);
@@ -101,9 +112,12 @@ public class GameMenuView extends menuView {
                         GameMenuView.Output("invalidMove");
                     } else if (!Objects.equals(player.getGameBoard().getBoard().get(numberBlock - 1), "0")) {
                         GameMenuView.Output("invalidMove");
-                    } else {
+                    } else if(!intract(selectedCard, player, numberBlock - 1).isEmpty()){
+                        GameMenuView.Output("invalidMove");
+                    }
+                    else {
                         ArrayList<Integer> Interacts=intract(selectedCard,enemyPlayer,numberBlock-1);
-                        for (int i =numberBlock-1; i < numberBlock+selectedCard.getDuration(); i++) {
+                        for (int i =numberBlock-1; i < (numberBlock+selectedCard.getDuration()-1); i++) {
                             if(Interacts.contains(i)) {
                                 cards enemyCard = cards.GetCardByName(enemyPlayer.getPlayerCardsDeck(), enemyPlayer.getGameBoard().getBoard().get(i));
                                 Player temp = cardFaceOfWinner(player, enemyPlayer, selectedCard, enemyCard);
@@ -128,6 +142,7 @@ public class GameMenuView extends menuView {
                         }
 
                         player.getPlayerCardsDeck().remove(selectedCard);
+                        player.setRounds(player.getRounds() - 1);
                         switchTurns(currentSuperGame.getCurrentGame());
                     }
                 } else {
@@ -214,6 +229,34 @@ public class GameMenuView extends menuView {
             }
         }
         return Temp;
+    }
+    public static ArrayList<Integer> intractSpecial(specialCards playedCard, Player enemy, int BlockIndex) {
+        ArrayList<Integer> Temp = new ArrayList<>();
+        for (int i = BlockIndex; i < BlockIndex + playedCard.getDuration(); i++) {
+            if (enemy.getGameBoard().getType().get(i).equals("specialCards")) {
+                Temp.add(i);
+            }
+        }
+        return Temp;
+    }
+    public static void runSpecialCards(Game game, specialCards card,int BlockIndex){
+        String cardName = card.getName();
+if(cardName.equals("sheild")){
+    String oposite=game.getCurrentEnemy().getGameBoard().getBoard().get(BlockIndex);
+    if(oposite.equals("0")||oposite.equals("1")){
+        GameMenuView.Output("invalidMove");
+    }else{
+        game.getCurrentEnemy().getGameBoard().getBoard().set(BlockIndex,"Hole");
+        game.getCurrentPlayer().getGameBoard().getBoard().set(BlockIndex,"shield");
+    }
+}else{
+    specialCards.GetSpecialCardByName(specialCards.getGameSpecialCards(), cardName).run(game);
+    for (int i =BlockIndex; i < BlockIndex+1+ card.getDuration(); i++) {
+        game.getCurrentPlayer().getGameBoard().getBoard().add(i, card.getName());
+    }
+}
+
+
     }
 }
 

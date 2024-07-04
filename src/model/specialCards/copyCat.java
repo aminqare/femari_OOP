@@ -17,17 +17,17 @@ public class copyCat extends specialCards{
     }
 
     @Override
-    void run(Object param) {
+    public void run(Object param) {
         if (param instanceof Game) {
             run((Game) param);
         } else {
             System.out.println("ridi");
         }
     }
-    public void run(Game game){
+    public static void run(Game game){
         Player player= game.getCurrentPlayer();
-        ArrayList<cards> PlayerCards=player.getPlayerCards();
-        ArrayList<specialCards> PlayerSpecialCards=player.getPlayerSpecialCards();
+        ArrayList<cards> PlayerCards=player.getPlayerCardsDeck();
+        ArrayList<specialCards> PlayerSpecialCards=player.getPlayerSpecialCardsDeck();
 
         System.out.println("Enter your desired card Index\n");
       cards.ShowCards(PlayerCards,PlayerSpecialCards);

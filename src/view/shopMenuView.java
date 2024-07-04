@@ -6,6 +6,7 @@ import com.google.gson.JsonParser;
 import controller.AdminMenuController;
 import controller.shopMenuController;
 import model.CardsDB;
+import model.UsersDB;
 import model.cards.cards;
 import model.components.User;
 import model.specialCards.*;
@@ -13,6 +14,8 @@ import model.utils.SpecialCardsDB;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 
@@ -40,7 +43,10 @@ public class shopMenuView {
                     getJSONRegexMatcher(input, "selectionUpdate" , menuRegexPatternsObject);
             Matcher selectionBuy =
                     getJSONRegexMatcher(input, "selectionBuy" , menuRegexPatternsObject);;
-            if(showCards.find()){
+            if(Objects.equals(input, "back")){
+                mainMenuView.run(currentUser,scanner);
+            }
+            else if(showCards.find()){
                 shopMenuController.ShowCards(CardsDB.cardsDB.getCards(), specialCards.getGameSpecialCards());
             }
             else if(selectionUpdate.find()){
@@ -59,6 +65,7 @@ public class shopMenuView {
                             User.GetSpecialCardByName(currentUser.getPlayerSpecialCards(),name)
                                     .setLevel(specialCard.getLevel()+1);
                             currentUser.setGold(currentUser.getGold() - specialCard.getPrice());
+                            updateDB(currentUser);
                             shopMenuView.output("successfulUpdate");
                         }
                     }
@@ -75,6 +82,7 @@ public class shopMenuView {
                             User.GetCardByName(currentUser.getPlayerCards(), name).powerUp();
                             User.GetCardByName(currentUser.getPlayerCards(), name).setLevel(card.getLevel() + 1);
                             currentUser.setGold(currentUser.getGold() - card.getUpgradeCost());
+                            updateDB(currentUser);
                             shopMenuView.output("successfulUpdate");
                         }
                     }
@@ -97,13 +105,15 @@ public class shopMenuView {
                         }
                         else{
                             currentUser.getPlayerSpecialCards().add(specialCard);
+
                             currentUser.setGold(currentUser.getGold() - specialCard.getPrice());
+                            updateDB(currentUser);
                             shopMenuView.output("successfulPurchase");
                         }
                     }
                 }
                 else if(specialCard == null){
-                    if(User.GetCardByName(currentUser.getPlayerCards(), name) == null){
+                    if(User.GetCardByName(currentUser.getPlayerCards(), name) != null){
                         shopMenuView.output("cardOnDeck");
                     }
                     else{
@@ -113,6 +123,7 @@ public class shopMenuView {
                         else{
                             currentUser.getPlayerCards().add(card);
                             currentUser.setGold(currentUser.getGold() - card.getPrice());
+                            updateDB(currentUser);
                             shopMenuView.output("successfulPurchase");
                         }
                     }
@@ -129,5 +140,14 @@ public class shopMenuView {
     public static void output(String code, Object... params){
         String pathToJSON = "src/response/ShopMenuResponses.json";
         menuView.output(pathToJSON, code, params);
+    }
+    public static void updateDB (User currentUser){
+        UsersDB.usersDB.update(currentUser);
+        try {
+            UsersDB.usersDB.toJSON();
+        } catch (
+                IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

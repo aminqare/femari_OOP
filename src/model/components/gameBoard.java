@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class gameBoard {
     ArrayList<String> Board = new ArrayList<>();
-    ArrayList<String> Type=new ArrayList<>(21);
+    ArrayList<String> Type=new ArrayList<>();
 
     public gameBoard() {
         Random random = new Random();
@@ -32,6 +32,7 @@ public class gameBoard {
         Board = playerGameBoard;
     }
     public void ShowBoard(){
+        UpdateType();
         for (String s : this.Board) {
             if(s.equals("0")){
                 System.out.print("\t|");
@@ -103,22 +104,24 @@ public class gameBoard {
     }
 
     public void UpdateType(){
+        ArrayList<String> TempType=new ArrayList<>();
         for (int i = 0; i < this.Board.size(); i++) {
             if(Board.get(i).equals("0")){
-                Type.set(i,"empty");
+                TempType.add(i,"empty");
             }else if(Board.get(i).equals("1")){
-                Type.set(i,"unv");
+                TempType.add(i,"unv");
             }else if(Board.get(i).equals("Hole")){
-                Type.set(i,"hole");
+                TempType.add(i,"hole");
             }else{
                 cards card = cards.GetCardByName(CardsDB.cardsDB.getCards(), Board.get(i));
                 specialCards specialCard = specialCards.GetSpecialCardByName(specialCards.getGameSpecialCards(), Board.get(i));
                 if(card==null){
-                    Type.set(i,"specialCards");
+                    TempType.add(i,"specialCards");
                 }else if(specialCard==null){
-                    Type.set(i,"cards");
+                    TempType.add(i,"cards");
                 }
             }
         }
+        this.setType(TempType);
     }
 }
