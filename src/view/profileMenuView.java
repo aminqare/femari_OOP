@@ -118,6 +118,7 @@ public class profileMenuView {
                 }
                 currentUser.setEmail(email);
                 updateDB(currentUser);
+                updateDB(currentUser);
                 profileMenuView.output("emailChanged");
             }
             else if(getRankMatcher.find()){

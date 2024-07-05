@@ -137,54 +137,43 @@ public class mainMenuView extends menuView {
                 if(sortType.equals("name")){
                     currentUser.getGameHistory().sort(levelComparator);
                     if(format.equals("normal")){
-                        for (int i = 0; i < currentUser.getGameHistory().size(); i++) {
-                            //System.out.println("kir");
-                            mainMenuView.Output("gameHistory", currentUser.getGameHistory().get(i).toString());
-                        }
+                            mainMenuView.Output("gameHistory", currentUser.getGameHistory().toString());
                     }
                     else if(format.equals("reverse")){
-                        for (int i = currentUser.getGameHistory().size() - 1; i >= 0; i--) {
-                            mainMenuView.Output("gameHistory", currentUser.getGameHistory().get(i).toString());
-                        }
+                      Collections.reverse(currentUser.getGameHistory());
+                            mainMenuView.Output("gameHistory", currentUser.getGameHistory().toString());
+
                     }
                 }
                 else if(sortType.equals("level")){
                     currentUser.getGameHistory().sort(levelComparator);
                     if(format.equals("normal")){
-                        for (int i = 0; i < currentUser.getGameHistory().size(); i++) {
-                            mainMenuView.Output("gameHistory", currentUser.getGameHistory().get(i).toString());
-                        }
+                        mainMenuView.Output("gameHistory", currentUser.getGameHistory().toString());
                     }
                     else if(format.equals("reverse")){
-                        for (int i = currentUser.getGameHistory().size() - 1; i >= 0; i--) {
-                            mainMenuView.Output("gameHistory", currentUser.getGameHistory().get(i).toString());
-                        }
+                        Collections.reverse(currentUser.getGameHistory());
+                        mainMenuView.Output("gameHistory", currentUser.getGameHistory().toString());
+
                     }
                 }
                 else if(sortType.equals("gameState")){
                     currentUser.getGameHistory().sort(winLossComparator);
                     if(format.equals("normal")){
-                        for (int i = 0; i < currentUser.getGameHistory().size(); i++) {
-                            mainMenuView.Output("gameHistory", currentUser.getGameHistory().get(i).toString());
-                        }
+                        mainMenuView.Output("gameHistory", currentUser.getGameHistory().toString());
                     }
                     else if(format.equals("reverse")){
-                        for (int i = currentUser.getGameHistory().size() - 1; i >= 0; i--) {
-                            mainMenuView.Output("gameHistory", currentUser.getGameHistory().get(i).toString());
-                        }
+                        Collections.reverse(currentUser.getGameHistory());
+                        mainMenuView.Output("gameHistory", currentUser.getGameHistory().toString());
                     }
                 }
                 else{
                     currentUser.getGameHistory().sort(dateComparator);
                     if(format.equals("normal")){
-                        for (int i = 0; i < currentUser.getGameHistory().size(); i++) {
-                            mainMenuView.Output("gameHistory", currentUser.getGameHistory().get(i).toString());
-                        }
+                        mainMenuView.Output("gameHistory", currentUser.getGameHistory().toString());
                     }
                     else if(format.equals("reverse")){
-                        for (int i = currentUser.getGameHistory().size() - 1; i >= 0; i--) {
-                            mainMenuView.Output("gameHistory", currentUser.getGameHistory().get(i).toString());
-                        }
+                        Collections.reverse(currentUser.getGameHistory());
+                        mainMenuView.Output("gameHistory", currentUser.getGameHistory().toString());
                     }
                 }
             }
@@ -338,6 +327,7 @@ public class mainMenuView extends menuView {
             return (o1.getGameDate().compareTo(o2.getGameDate()));
         }
     };
+
 
 
     }
