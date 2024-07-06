@@ -31,7 +31,8 @@ public class LoginController {
     public static User user;
     long currentTime = System.currentTimeMillis();
     int failedAttempts = 0;
-    long nextAttemptTime=0;
+    long nextAttemptTime = 0;
+
     public static User getUser() {
         return user;
     }
@@ -111,7 +112,6 @@ public class LoginController {
 //
 
 
-
         if (!authenticate) {
             openErrorDialog("Error!: Provided credentials are invalid!");
             if (currentTime < nextAttemptTime) {
@@ -131,8 +131,8 @@ public class LoginController {
 //        if (!authenticate) {
 //            openErrorDialog("Error!: Provided credentials are incorrect!");
 //        }
-        else if(GraphicalCaptchaController.generateCaptcha()){
-            if(stayLoggedInBox.isSelected()){
+        else if (GraphicalCaptchaController.generateCaptcha()) {
+            if (stayLoggedInBox.isSelected()) {
                 Thread.sleep(1000);
                 JsonElement prefsElement;
                 String pathToPrefs = "src/main/java/stronghold/database/preferences.json";
@@ -146,7 +146,7 @@ public class LoginController {
 
                 try {
                     String toBeWritten = prefsElement.toString();
-                    toBeWritten = toBeWritten.replace("!NULLUSER",username);
+                    toBeWritten = toBeWritten.replace("!NULLUSER", username);
                     FileWriter fileWriter = new FileWriter(pathToPrefs);
                     fileWriter.write(toBeWritten);
                     fileWriter.close();
@@ -155,14 +155,16 @@ public class LoginController {
                     throw new RuntimeException(e);
                 }
             }
+            user=UsersDB.usersDB.getUserByUsername(username);
             HubMenuController.setCurrentUser(user);
             PauseTransition delay = new PauseTransition(Duration.millis(30));
             delay.setOnFinished(event -> {
                 Parent root = null;
                 try {
                     //root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/hubMenuView.fxml")));
+
                     FXMLLoader loader = new FXMLLoader();
-                    loader.setLocation(getClass().getResource("/kireKhar.fxml"));
+                    loader.setLocation(getClass().getResource("/hubMenuView.fxml"));
                     root = loader.load();
 //                    URL fxmlLocation = getClass().getResource("/hubMenuView.fxml");
 //                    System.out.println("FXML Location: " + fxmlLocation);
@@ -173,7 +175,6 @@ public class LoginController {
                         IOException ignored) {
 
                 }
-
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) loginButton.getScene().getWindow();
                 stage.setScene(scene);
@@ -185,11 +186,12 @@ public class LoginController {
         }
 
     }
-    public static boolean authenticate(String username, String password){
-        if(!usernameExists(username))
+
+    public static boolean authenticate(String username, String password) {
+        if (!usernameExists(username))
             return false;
         User user = UsersDB.usersDB.getUserByUsername(username);
-        if(!user.getPassword().equals(Encryption.toSHA256(password))){
+        if (!user.getPassword().equals(Encryption.toSHA256(password))) {
             return false;
         }
         return true;

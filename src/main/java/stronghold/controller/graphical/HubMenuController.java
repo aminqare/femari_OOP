@@ -3,6 +3,7 @@ package stronghold.controller.graphical;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -128,11 +129,20 @@ public class HubMenuController {
 
     @FXML
     public void initialize() throws IOException {
-//        String username = currentUser.getUsername();
-//        usernameLabel.setText(username);
-        String username = "amin";
-        usernameLabel.setText(username);
+//       String username = currentUser.getUsername();
+//       usernameLabel.setText(username);
+      if(currentUser!=null){
+          String username=currentUser.getUsername();
+          usernameLabel.setText(username);
+      }else{
+          System.out.println("user is null");
+      }
 
+    }
+    public void updateuser(User user){
+        Platform.runLater(()->{
+            currentUser.set(user);
+        });
     }
 
  //   @FXML
