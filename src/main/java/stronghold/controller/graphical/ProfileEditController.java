@@ -106,9 +106,10 @@ public class ProfileEditController {
 
     @FXML
     public void save(){
+        String pass = Encryption.toSHA256(confirmPasswordField.getText());
         if(!checkStates())
             return;
-        if(!Encryption.toSHA256(confirmPasswordField.getText()).equals(currentUser.getPassword())){
+        if(!Encryption.toSHA256(pass).equals(currentUser.getPassword())){
             errorPrompt.setText("Old password is incorrect or not provided!");
             return;
         }
@@ -143,8 +144,9 @@ public class ProfileEditController {
             currentUser.setUsername(usernameField.getText());
             currentUser.setEmail(emailField.getText());
             currentUser.setNickname(nicknameField.getText());
+            String newPass = Encryption.toSHA256(passwordField.getText());
             if(!passwordField.getText().isEmpty()){
-                currentUser.setPassword(Encryption.toSHA256(passwordField.getText()));
+                currentUser.setPassword(Encryption.toSHA256(newPass));
             }
 
         });
