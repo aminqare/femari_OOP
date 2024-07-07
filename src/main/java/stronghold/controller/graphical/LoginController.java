@@ -23,7 +23,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Objects;
+import java.util.Random;
 
+import static stronghold.controller.graphical.HubMenuController.updateDB;
 import static stronghold.controller.menuController.usernameExists;
 
 public class LoginController {
@@ -53,6 +55,20 @@ public class LoginController {
     public void openErrorDialog(String error) {
         Dialog<String> dialog = new Dialog<String>();
         dialog.setTitle("Error!");
+        Label label = new Label(error);
+        dialog.setContentText(label.getText());
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+        dialog.getDialogPane().getChildren().add(label);
+        ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(type);
+        Node closeButton = dialog.getDialogPane().lookupButton(ButtonType.CLOSE);
+        closeButton.managedProperty().bind(closeButton.visibleProperty());
+        closeButton.setVisible(false);
+        dialog.showAndWait();
+    }
+    public void openMessageDialog(String error) {
+        Dialog<String> dialog = new Dialog<String>();
+        dialog.setTitle("Message");
         Label label = new Label(error);
         dialog.setContentText(label.getText());
         dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
@@ -157,6 +173,13 @@ public class LoginController {
             }
             user=UsersDB.usersDB.getUserByUsername(username);
             HubMenuController.setCurrentUser(user);
+            if(user.getLevel()==0){
+                mainMenuController.StartPack(new Random(), user);
+                user.setLevel(user.getLevel() + 1);
+                updateDB(user);
+                openMessageDialog("Congrats!\nstart pack is given to " + user.getUsername());
+
+            }
             PauseTransition delay = new PauseTransition(Duration.millis(30));
             delay.setOnFinished(event -> {
                 Parent root = null;
@@ -175,6 +198,7 @@ public class LoginController {
                         IOException ignored) {
 
                 }
+
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) loginButton.getScene().getWindow();
                 stage.setScene(scene);

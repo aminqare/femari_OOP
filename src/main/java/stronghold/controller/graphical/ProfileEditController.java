@@ -46,57 +46,57 @@ public class ProfileEditController {
     }
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         usernameField.setText(currentUser.getUsername());
         emailField.setText(currentUser.getEmail());
         nicknameField.setText(currentUser.getNickname());
     }
 
-    public boolean checkIfUsernameExists(String username){
+    public boolean checkIfUsernameExists(String username) {
         return UsersDB.usersDB.getUserByUsername(username) != null;
     }
 
-    public boolean checkIfEmailExists(String email){
+    public boolean checkIfEmailExists(String email) {
         return UsersDB.usersDB.getUserByEmail(email) != null;
     }
 
     @FXML
-    public boolean checkStates(){
+    public boolean checkStates() {
         String newUsername = usernameField.getText();
         String newEmail = emailField.getText();
 
         boolean emailIsTaken = checkIfEmailExists(emailField.getText());
         boolean usernameExists = checkIfUsernameExists(usernameField.getText());
 
-        if(newUsername.isEmpty()){
+        if (newUsername.isEmpty()) {
             errorPrompt.setText("Username not provided!");
             return false;
         }
-        if(!mainMenuController.usernameFormatCorrect(newUsername)){
+        if (!mainMenuController.usernameFormatCorrect(newUsername)) {
             errorPrompt.setText("Username format incorrect!");
             return false;
         }
-        if(usernameExists && !newUsername.equals(currentUser.getUsername())){
+        if (usernameExists && !newUsername.equals(currentUser.getUsername())) {
             errorPrompt.setText("Entered Username is already taken!");
             return false;
         }
-        if(newEmail.isEmpty()){
+        if (newEmail.isEmpty()) {
             errorPrompt.setText("Email not provided!");
             return false;
         }
-        if(!mainMenuController.emailIsValid(newEmail)){
+        if (!mainMenuController.emailIsValid(newEmail)) {
             errorPrompt.setText("Email format incorrect!");
             return false;
         }
-        if(emailIsTaken && !newEmail.equals(currentUser.getEmail())){
+        if (emailIsTaken && !newEmail.equals(currentUser.getEmail())) {
             errorPrompt.setText("Email already exists!");
             return false;
         }
-        if(nicknameField.getText().isEmpty()){
+        if (nicknameField.getText().isEmpty()) {
             errorPrompt.setText("Nickname not provided!");
             return false;
         }
-        if(!passwordField.getText().isEmpty() && !mainMenuController.passwordIsStrong(passwordField.getText())){
+        if (!passwordField.getText().isEmpty() && !mainMenuController.passwordIsStrong(passwordField.getText())) {
             errorPrompt.setText("New password is weak!");
             return false;
         }
@@ -105,16 +105,17 @@ public class ProfileEditController {
     }
 
     @FXML
-    public void save(){
-        if(!checkStates())
+    public void save() {
+        String pass = Encryption.toSHA256(confirmPasswordField.getText());
+        if (!checkStates())
             return;
-        if(!Encryption.toSHA256(confirmPasswordField.getText()).equals(currentUser.getPassword())){
+        if (!Encryption.toSHA256(pass).equals(currentUser.getPassword())) {
             errorPrompt.setText("Old password is incorrect or not provided!");
             return;
         }
-        if(!GraphicalCaptchaController.generateCaptcha())
+        if (!GraphicalCaptchaController.generateCaptcha())
             return;
-        if(!currentUser.getUsername().equals(usernameField.getText())){
+        if (!currentUser.getUsername().equals(usernameField.getText())) {
             JsonElement prefsElement;
             String pathToPrefs = "src/main/java/stronghold/database/preferences.json";
             try {
@@ -143,10 +144,11 @@ public class ProfileEditController {
             currentUser.setUsername(usernameField.getText());
             currentUser.setEmail(emailField.getText());
             currentUser.setNickname(nicknameField.getText());
-            if(!passwordField.getText().isEmpty()){
-                currentUser.setPassword(Encryption.toSHA256(passwordField.getText()));
+            String newPass = Encryption.toSHA256(passwordField.getText());
+            if (!passwordField.getText().isEmpty()) {
+                currentUser.setPassword(Encryption.toSHA256(newPass));
             }
-
+            updateDB(currentUser);
         });
         delay.play();
 
@@ -154,9 +156,18 @@ public class ProfileEditController {
     }
 
     @FXML
-    public void setAvatar(){
+    public void setAvatar() {
         FileChooser fileChooser = new FileChooser();
         File img = fileChooser.showOpenDialog(new Stage());
         avatar.setImage(new Image(img.getAbsolutePath()));
+    }
+    public static void updateDB (User currentUser){
+        UsersDB.usersDB.update(currentUser);
+        try {
+            UsersDB.usersDB.toJSON();
+        } catch (
+                IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

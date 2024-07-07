@@ -13,7 +13,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import stronghold.controller.mainMenuController;
 import stronghold.controller.profileMenuController;
+import stronghold.model.UsersDB;
 import stronghold.model.components.User;
 import stronghold.view.graphics.LoginView;
 import stronghold.view.graphics.ProfileEditView;
@@ -23,10 +25,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Objects;
+import java.util.Random;
 
 public class HubMenuController {
 
     private static User currentUser;
+    public Button shopMenu;
 
     public static User getCurrentUser() {
         return currentUser;
@@ -126,6 +130,17 @@ public class HubMenuController {
         stage.showAndWait();
         usernameLabel.setText(currentUser.getUsername());
     }
+    public void enterShop() throws IOException, InterruptedException {
+        User user=UsersDB.usersDB.getUserByUsername(currentUser.getUsername());
+        ShopController.setUser(user);
+        Thread.sleep(200);
+        Stage primaryStage = new Stage();
+        Pane root;
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/ShopMenu.fxml")));
+        Scene currentScene = new Scene(root);
+        primaryStage.setScene(currentScene);
+        primaryStage.show();
+    }
 
     @FXML
     public void initialize() throws IOException {
@@ -138,14 +153,27 @@ public class HubMenuController {
           System.out.println("user is null");
       }
 
+
     }
     public void updateuser(User user){
         Platform.runLater(()->{
             currentUser.set(user);
         });
     }
+    public static void updateDB (User currentUser){
+        UsersDB.usersDB.update(currentUser);
+        try {
+            UsersDB.usersDB.toJSON();
+        } catch (
+                IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
- //   @FXML
+
+
+
+    //   @FXML
 //    public void searchPlayers(ActionEvent actionEvent) {
 //        Stage stage = new Stage();
 //        Pane root = null;

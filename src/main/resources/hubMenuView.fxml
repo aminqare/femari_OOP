@@ -9,7 +9,7 @@
     <children>
         <VBox alignment="TOP_CENTER" layoutX="-2.0" prefHeight="331.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: #222266;">
             <children>
-                <Label text="Stronghold" textFill="#c4a633">
+                <Label text="city wars : Tehran reign" textFill="#c4a633">
                     <font>
                         <Font name="System Bold" size="24.0" />
                     </font>
@@ -24,6 +24,7 @@
                     </children>
                 </HBox>
 <!--                <Button fx:id="startNewGameButton" mnemonicParsing="false" onAction="#goToLobby" style="-fx-background-color: #c4a633; -fx-background-radius: 25;" text="Enter Game Lobby" />-->
+                <Button fx:id="shopMenu" mnemonicParsing="false" onAction="#enterShop" style="-fx-background-color: #c4a633; -fx-background-radius: 25;" text="Enter Shop Menu" />
                 <Button fx:id="profileMenuButton" mnemonicParsing="false" onAction="#openProfileEdit" style="-fx-background-color: #c4a633; -fx-background-radius: 25;" text="Edit Profile Menu" />
 <!--                <Button mnemonicParsing="false" onAction="#searchPlayers" style="-fx-background-color: #c4a633; -fx-background-radius: 25;" text="Search Players" />-->
                 <Button fx:id="logOutButton" mnemonicParsing="false" onMouseClicked="#logOut" style="-fx-background-color: #c4a633; -fx-background-radius: 25;" text="Log Out" />

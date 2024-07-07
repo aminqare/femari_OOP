@@ -1,5 +1,6 @@
 package stronghold.controller;
 
+import javafx.scene.layout.HBox;
 import stronghold.model.CardsDB;
 import stronghold.model.cards.cards;
 import stronghold.model.specialCards.specialCards;
@@ -10,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class shopMenuController {
+
+
     public static void ShowCards(List<cards> cards, ArrayList<specialCards> specialCards){
         StringBuilder output=new StringBuilder();
         int Index=0;
