@@ -61,7 +61,9 @@ public class ShopController {
     public void addSpecialCardsToBar()
     {
         for (int i = 0; i < specialCards.getGameSpecialCards().size(); i++) {
+            System.out.println(specialCards.getGameSpecialCards().get(i).getName());
             specialCardsBar.getChildren().add(new graphicalCards(specialCards.getGameSpecialCards().get(i).getName(),"specialCards"));
+
         }
     }
     public void addCardsToBar()
@@ -75,7 +77,7 @@ public class ShopController {
         user.setMaxXP();
 
        addSpecialCardsToBar();
-       addCardsToBar();
+      // addCardsToBar();
        setUserID();
         DoubleProperty xp = new SimpleDoubleProperty(user.getXP());
        XpProgress.progressProperty().bind(xp.divide(user.getMaxXP()));

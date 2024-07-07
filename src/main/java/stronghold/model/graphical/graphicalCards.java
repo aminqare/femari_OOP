@@ -30,7 +30,7 @@ public class graphicalCards extends Rectangle {
         super(150,206);
         this.Type=Type;
         this.name=name;
-//        setFill(new ImagePattern(new Image(graphicalCards.class.getResource("/image/"+name+".png").toExternalForm())));
+        setFill(new ImagePattern(new Image(graphicalCards.class.getResource("/images/specialCards/"+name+".png").toExternalForm())));
 
     }
 }

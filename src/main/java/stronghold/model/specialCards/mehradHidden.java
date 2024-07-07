@@ -15,7 +15,7 @@ public class mehradHidden extends specialCards {
     }
     public  mehradHidden(){
         this.setDuration(0);
-        this.setName("mehrad Hidden");
+        this.setName("mehradHidden");
         this.setPrice(42);
     }
 
