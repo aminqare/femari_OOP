@@ -26,11 +26,22 @@ public class graphicalCards extends Rectangle {
         this.locked = locked;
     }
 
-    public graphicalCards(String name,String Type){
+    public String getType() {
+        return Type;
+    }
+
+    public void setType(String type) {
+        Type = type;
+    }
+
+    public graphicalCards(String name, String Type){
         super(150,206);
         this.Type=Type;
         this.name=name;
-        setFill(new ImagePattern(new Image(graphicalCards.class.getResource("/images/specialCards/"+name+".png").toExternalForm())));
-
+        if(Type.equals("specialCards")) {
+            setFill(new ImagePattern(new Image(graphicalCards.class.getResource("/images/specialCards/" + name + ".png").toExternalForm())));
+        }else{
+            setFill(Color.BLACK);
+        }
     }
 }

@@ -4,15 +4,22 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import stronghold.model.CardsDB;
+import stronghold.model.UsersDB;
 import stronghold.model.components.User;
 import stronghold.model.graphical.graphicalCards;
 import stronghold.model.specialCards.specialCards;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.concurrent.Callable;
 
 public class ShopController {
@@ -62,14 +69,20 @@ public class ShopController {
     {
         for (int i = 0; i < specialCards.getGameSpecialCards().size(); i++) {
             System.out.println(specialCards.getGameSpecialCards().get(i).getName());
-            specialCardsBar.getChildren().add(new graphicalCards(specialCards.getGameSpecialCards().get(i).getName(),"specialCards"));
+            graphicalCards card=new graphicalCards(specialCards.getGameSpecialCards().get(i).getName(),"specialCards");
+            specialCardsBar.getChildren().add(card);
+            card.setOnMouseClicked(event->openSpecialCardInfo(card));
+
 
         }
     }
     public void addCardsToBar()
     {
         for (int i = 0; i < CardsDB.getCards().size(); i++) {
-            cardsBar.getChildren().add(new graphicalCards(CardsDB.getCards().get(i).getName(),"cards"));
+            graphicalCards card=new graphicalCards(CardsDB.getCards().get(i).getName(),"cards");
+            cardsBar.getChildren().add(card);
+            card.setOnMouseClicked(event->openCardsInfo(card));
+
         }
     }
     @FXML
@@ -77,12 +90,14 @@ public class ShopController {
         user.setMaxXP();
 
        addSpecialCardsToBar();
-      // addCardsToBar();
-       setUserID();
+       addCardsToBar();
+
+            setUserID();
+
         DoubleProperty xp = new SimpleDoubleProperty(user.getXP());
        XpProgress.progressProperty().bind(xp.divide(user.getMaxXP()));
     }
-    public void setUserID(){
+    public  void setUserID(){
         if(user!=null){
 
             userID.setText(user.getUsername()+"\n\tGold: "+user.getGold()+"\n\tLevel: "+ user.getLevel());
@@ -90,5 +105,45 @@ public class ShopController {
         }else{
             System.out.println("user is null");
         }
+    }
+    private void openSpecialCardInfo(graphicalCards card){
+User user= UsersDB.usersDB.getUserByUsername(ShopController.getUser().getUsername());
+        specialCardsInfoController.setCurrentUser(user);
+        specialCardsInfoController.setCard(card);
+        Pane root = null;
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/specialCardsInfo.fxml")));
+        } catch (
+                IOException e) {
+            throw new RuntimeException(e);
+        }
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setOnCloseRequest(e->{
+            setUserID();
+        });
+        stage.showAndWait();
+
+    }
+    private void openCardsInfo(graphicalCards card){
+        User user= UsersDB.usersDB.getUserByUsername(ShopController.getUser().getUsername());
+        cardsInfoController.setCurrentUser(user);
+        cardsInfoController.setCard(card);
+        Pane root = null;
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/cardsInfo.fxml")));
+        } catch (
+                IOException e) {
+            throw new RuntimeException(e);
+        }
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.setOnCloseRequest(e->{
+            setUserID();
+        });
+        stage.showAndWait();
+
     }
 }
