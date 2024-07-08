@@ -99,19 +99,22 @@ public class HubMenuController {
         dialog.showAndWait();
     }
 
-//    public void goToLobby() throws IOException, InterruptedException {
-//        // TODO: wire up game menu
-//        LobbyController.setUser(currentUser);
-//        LobbyController.setClient(client);
-//        Thread.sleep(200);
-//        Stage primaryStage = new Stage();
-//        Pane root;
-//        LobbyController.setStage(primaryStage);
-//        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/LobbyMenu.fxml")));
-//        Scene currentScene = new Scene(root);
-//        primaryStage.setScene(currentScene);
-//        primaryStage.show();
-//    }
+    public void goToLobby() throws IOException, InterruptedException {
+        LobbyController.setUser(currentUser);
+        Thread.sleep(200);
+        Stage primaryStage = new Stage();
+        Pane root;
+        LobbyController.setStage(primaryStage);
+        root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/LobbyMenu.fxml")));
+        Scene currentScene = new Scene(root);
+        URL url = getClass().getResource("/style.css");
+        if (url == null) {
+            throw new RuntimeException("Unable to load style.css, make sure it exists in the resources directory.");
+        }
+        currentScene.getStylesheets().add(url.toExternalForm());
+        primaryStage.setScene(currentScene);
+        primaryStage.show();
+    }
 
     public void openProfileEdit() {
         ProfileEditController.setCurrentUser(currentUser);

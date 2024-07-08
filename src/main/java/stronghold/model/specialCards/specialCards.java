@@ -19,6 +19,7 @@ import java.util.List;
 
 public abstract class specialCards implements Serializable {
     private String name;
+    private boolean IsBuyed=false;
     private int level=1;
     private int duration;
     private double price;

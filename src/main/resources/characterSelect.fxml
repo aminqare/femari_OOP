@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: BLACK;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="stronghold.controller.graphical.CharacterSelectController">
+   <children>
+      <ImageView fitHeight="142.0" fitWidth="115.0" layoutX="27.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Amin.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="115.0" layoutX="170.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Moca.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="115.0" layoutX="300.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Mobina.jpeg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="115.0" layoutX="447.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/nOfK.jpeg" />
+         </image>
+      </ImageView>
+      <Label layoutX="70.0" layoutY="257.0" text="Amin" textFill="#bf0404" />
+      <Label layoutX="212.0" layoutY="257.0" text="Moca" textFill="#bf0505" />
+      <Label layoutX="343.0" layoutY="257.0" text="Mobina" textFill="#b90606" />
+      <Label layoutX="489.0" layoutY="257.0" prefHeight="17.0" prefWidth="31.0" text="n of k" textFill="#d00505" />
+      <Label layoutX="145.0" layoutY="6.0" prefHeight="71.0" prefWidth="308.0" text="Choose Your  Characters" textFill="#d0d706">
+         <font>
+            <Font name="System Bold" size="29.0" />
+         </font>
+      </Label>
+      <TextField fx:id="firstPlayerCharacter" layoutX="85.0" layoutY="305.0" prefHeight="26.0" prefWidth="130.0" promptText="Player One" />
+      <TextField fx:id="secondPlayerCharacter" layoutX="377.0" layoutY="305.0" prefHeight="26.0" prefWidth="141.0" promptText="Player Two" />
+      <Button fx:id="DoneButton" layoutX="276.0" layoutY="318.0" mnemonicParsing="false" onMouseClicked="#authenticate" style="-fx-background-color: #c4a633; -fx-background-radius: 24; -fx-cursor: hand;" text="Done" />
+   </children>
+</AnchorPane>
