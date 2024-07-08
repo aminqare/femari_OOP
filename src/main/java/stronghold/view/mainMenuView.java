@@ -303,25 +303,25 @@ public class mainMenuView extends menuView {
                 throw new RuntimeException(e);
             }
         }
-    static Comparator<gameHistory> levelComparator = new Comparator<gameHistory>() {
+    public static Comparator<gameHistory> levelComparator = new Comparator<gameHistory>() {
         @Override
         public int compare(gameHistory o1, gameHistory o2) {
             return Integer.compare(o1.getOpponentLevel(), o2.getOpponentLevel());
         }
     };
-    Comparator<gameHistory> nameComparator = new Comparator<gameHistory>() {
+  public static Comparator<gameHistory> nameComparator = new Comparator<gameHistory>() {
         @Override
         public int compare(gameHistory o1, gameHistory o2) {
             return CharSequence.compare(o1.getOpponentName(), o2.getOpponentName());
         }
     };
-    static Comparator<gameHistory> winLossComparator = new Comparator<gameHistory>() {
+   public static Comparator<gameHistory> winLossComparator = new Comparator<gameHistory>() {
         @Override
         public int compare(gameHistory o1, gameHistory o2) {
             return CharSequence.compare(o1.getGameState(), o2.getGameState());
         }
     };
-    static Comparator<gameHistory> dateComparator = new Comparator<gameHistory>() {
+   public static Comparator<gameHistory> dateComparator = new Comparator<gameHistory>() {
         @Override
         public int compare(gameHistory o1, gameHistory o2) {
             return (o1.getGameDate().compareTo(o2.getGameDate()));
