@@ -32,7 +32,7 @@ public class User implements Serializable {
         this.passwordRecoveryAnswer = passwordRecoveryAnswer;
         this.playerCards = new ArrayList<>();
         this.playerSpecialCards = new ArrayList<>();
-        this.gold = 20;
+        this.gold = 80;
         this.level = 0;
         this.score = 0;
         this.XP = 0;
