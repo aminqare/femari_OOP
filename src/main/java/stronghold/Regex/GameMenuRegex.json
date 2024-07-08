@@ -1,0 +1,5 @@
+{
+  "showDeck": "^\\s*show\\s+my\\s+deck\\s*$",
+  "cartSelection": "^\\s*select\\s+card\\s+number\\s+(?<CardNumber>\\d+)\\s+in\\s+(?<cardDeck>\"[^\"]+\"|\\S+)\\s*$",
+  "PlaceCard": "^\\s*placing\\s+card\\s+number\\s+(?<CardNumber>\\d+)\\s+in\\s+(?<cardDeck>\"[^\"]+\"|\\S+)\\s+in\\s+block\\s+(?<BlockNumber>\\d+)\\s*$"
+}
