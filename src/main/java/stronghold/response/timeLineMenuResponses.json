@@ -1,0 +1,6 @@
+{
+  "HP": "INFO: HP's are\n$VAR1$'s HP: $VAR2$\n$VAR3$'s HP: $VAR4$",
+  "cards": "INFO: cards are\nPlayer One : $VAR1$\nPlayer Two : $VAR2$",
+  "finalHP": "INFO: final HP's are\n$VAR1$'s HP: $VAR2$\n$VAR3$'s HP: $VAR4$",
+  "newRound": "Success!: starting new round"
+}

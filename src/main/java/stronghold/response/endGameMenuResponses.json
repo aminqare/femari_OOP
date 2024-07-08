@@ -1,0 +1,4 @@
+{
+  "levelUp": "Success!: $VAR1$ has been level upped to level $VAR2$",
+  "gameFinished": "Success!: Winner is: $VAR1$ and Loser is: $VAR2$"
+}
