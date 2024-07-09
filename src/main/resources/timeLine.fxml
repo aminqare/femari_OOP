@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.paint.Color?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" fx:controller="stronghold.controller.graphical.timeLineController">
+
+
+
+    <GridPane fx:id="upperGround" layoutX="10.0" layoutY="170.0" prefHeight="230.0" prefWidth="1180.0" hgap="5.0" vgap="5.0" gridLinesVisible="true"/>
+    <GridPane fx:id="lowerGround" layoutX="10.0" layoutY="410.0" prefHeight="230.0" prefWidth="1180.0" hgap="5.0" vgap="5.0" gridLinesVisible="true"/>
+</AnchorPane>
+

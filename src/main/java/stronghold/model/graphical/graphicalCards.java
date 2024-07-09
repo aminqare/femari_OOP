@@ -31,7 +31,7 @@ public class graphicalCards extends Rectangle {
         this.Type=Type;
         this.name=name;
         Image image = new Image(graphicalCards.class.getResource("/images/" + Type + "/" + name + ".png").toExternalForm(), 200, 200, false, true);
-        System.out.println("Loaded image dimensions: " + image.getWidth() + "x" + image.getHeight());
+        //System.out.println("Loaded image dimensions: " + image.getWidth() + "x" + image.getHeight());
         setFill(new ImagePattern(image, 0, 0, 200, 200, false));
 
     }

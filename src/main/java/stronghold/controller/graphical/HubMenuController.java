@@ -32,6 +32,7 @@ public class HubMenuController {
 
     private static User currentUser;
     public Button shopMenu;
+    public Button gameHistory;
 
     public static User getCurrentUser() {
         return currentUser;
@@ -180,7 +181,22 @@ public class HubMenuController {
         }
     }
 
+    public void openGameHistory(ActionEvent actionEvent) throws InterruptedException, IOException {
+        User user= UsersDB.usersDB.getUserByUsername(HubMenuController.getCurrentUser().getUsername());
+        gameHistoryController.setUser(user);
 
+        Pane root = null;
+        try {
+            root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/gameHistory.fxml")));
+        } catch (
+                IOException e) {
+            throw new RuntimeException(e);
+        }
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.showAndWait();
+    }
 
 
     //   @FXML
