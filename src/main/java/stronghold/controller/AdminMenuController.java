@@ -13,10 +13,7 @@ public class AdminMenuController {
         add("powerade");
         add("oppsCardDefuser");
         add("mole");
-        add("mehradHidden");
         add("heal");
-        add("copyCat");
-        add("cardSnatcher");
         add("builder");
     }};
 

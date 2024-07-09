@@ -278,7 +278,7 @@ if(cardName.equals("shield")){
     if(oposite.equals("0")||oposite.equals("1")){
         GameMenuView.Output("invalidMove");
     }else{
-        game.getCurrentEnemy().getGameBoard().getBoard().set(BlockIndex,"Hole");
+        game.getCurrentEnemy().getGameBoard().getBoard().set(BlockIndex,"hole");
         game.getCurrentPlayer().getGameBoard().getBoard().set(BlockIndex,"shield");
     }
 }else{

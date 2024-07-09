@@ -1,12 +1,42 @@
 package stronghold.model.components;
 
+import javafx.scene.Group;
 import stronghold.model.cards.cards;
+import stronghold.model.graphical.cell;
 import stronghold.model.specialCards.specialCards;
 
 import java.util.ArrayList;
 
 public class Player extends User{
     private double damage;
+    private ArrayList<cell> cells ;
+    private ArrayList<cell> specialCardsCell;
+    private ArrayList<cell> cardsCell;
+
+    public ArrayList<cell> getSpecialCardsCell() {
+        return specialCardsCell;
+    }
+
+    public void setSpecialCardsCell(ArrayList<cell> specialCardsCell) {
+        this.specialCardsCell = specialCardsCell;
+    }
+
+    public ArrayList<cell> getCardsCell() {
+        return cardsCell;
+    }
+
+    public void setCardsCell(ArrayList<cell> cardsCell) {
+        this.cardsCell = cardsCell;
+    }
+
+    public ArrayList<cell> getCells() {
+        return cells;
+    }
+
+    public void setCells(ArrayList<cell> cells) {
+        this.cells = cells;
+    }
+
     private boolean IsFirstPlayer=false;
 
     public boolean isFirstPlayer() {
@@ -65,6 +95,9 @@ public class Player extends User{
         this.user = user;
         this.setPlayerCards(user.getPlayerCards());
         this.setPlayerSpecialCards(user.getPlayerSpecialCards());
+        this.cells = new ArrayList<>();
+        this.cardsCell = new ArrayList<>();
+        this.specialCardsCell = new ArrayList<>();
     }
 
     public User getUser() {

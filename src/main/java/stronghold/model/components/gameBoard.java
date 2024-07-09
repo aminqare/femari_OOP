@@ -103,14 +103,14 @@ public class gameBoard {
         Type = type;
     }
 
-    public void UpdateType(){
+    public  void UpdateType(){
         ArrayList<String> TempType=new ArrayList<>();
         for (int i = 0; i < this.Board.size(); i++) {
-            if(Board.get(i).equals("0")){
+            if(this.Board.get(i).equals("0")){
                 TempType.add(i,"empty");
-            }else if(Board.get(i).equals("1")){
+            }else if(this.Board.get(i).equals("1")){
                 TempType.add(i,"unv");
-            }else if(Board.get(i).equals("Hole")){
+            }else if(this.Board.get(i).equals("Hole")){
                 TempType.add(i,"hole");
             }else{
                 cards card = cards.GetCardByName(CardsDB.cardsDB.getCards(), Board.get(i));
