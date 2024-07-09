@@ -26,6 +26,7 @@
                 <Button fx:id="startNewGameButton" mnemonicParsing="false" onAction="#goToLobby" style="-fx-background-color: #c4a633; -fx-background-radius: 25;" text="Enter Game Lobby" />
                 <Button fx:id="shopMenu" mnemonicParsing="false" onAction="#enterShop" style="-fx-background-color: #c4a633; -fx-background-radius: 25;" text="Enter Shop Menu" />
                 <Button fx:id="profileMenuButton" mnemonicParsing="false" onAction="#openProfileEdit" style="-fx-background-color: #c4a633; -fx-background-radius: 25;" text="Edit Profile Menu" />
+                <Button fx:id="gameHistory" mnemonicParsing="false" onAction="#openGameHistory" style="-fx-background-color: #c4a633; -fx-background-radius: 25;" text="Game Histories" />
 <!--                <Button mnemonicParsing="false" onAction="#searchPlayers" style="-fx-background-color: #c4a633; -fx-background-radius: 25;" text="Search Players" />-->
                 <Button fx:id="logOutButton" mnemonicParsing="false" onMouseClicked="#logOut" style="-fx-background-color: #c4a633; -fx-background-radius: 25;" text="Log Out" />
             </children>

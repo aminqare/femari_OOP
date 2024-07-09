@@ -132,6 +132,7 @@ public class secondPlayerController {
                 openMessageDialog("Congrats!\nstart pack is given to " + secondUser.getUsername());
 
             }
+
             PauseTransition delay = new PauseTransition(Duration.millis(30));
             Platform.runLater(() -> {
                 Pane root = null;

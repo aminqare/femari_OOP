@@ -8,13 +8,15 @@ import javafx.stage.Stage;
 
 public class CharacterSelect extends Application {
     private static Stage primaryStage;
+
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        CharacterSelect.primaryStage = primaryStage;
         Pane root = FXMLLoader.load(getClass().getResource("/characterSelect.fmxl"));
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
+        CharacterSelect.primaryStage = primaryStage;
     }
 
     public static Stage getPrimaryStage() {

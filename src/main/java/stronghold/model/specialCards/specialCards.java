@@ -30,10 +30,10 @@ public abstract class specialCards implements Serializable {
         add(new powerade());
         add(new oppsCardDefuser());
         add(new mole());
-        add(new mehradHidden());
+        //add(new mehradHidden());
         add(new heal());
-        add(new copyCat());
-        add(new cardSnatcher());
+        //add(new copyCat());
+        //add(new cardSnatcher());
         add(new builder());
     }};
     public static specialCards GetSpecialCardByName(List<specialCards> cards, String name){

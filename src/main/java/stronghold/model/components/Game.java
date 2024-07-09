@@ -1,5 +1,7 @@
 package stronghold.model.components;
 
+import javafx.scene.Group;
+import stronghold.controller.graphical.GameMenuController;
 import stronghold.model.cards.cards;
 import stronghold.model.specialCards.specialCards;
 
@@ -66,12 +68,15 @@ public class Game {
         ArrayList<specialCards> specialCards = player.getPlayerSpecialCards();
         for (int i = 0; i < 5; i++) {
             double randomIndex = Math.abs(random.nextDouble());
-            if (randomIndex < 0.7) {
+            if (randomIndex%1 < 0.7) {
                 int randomIndexForCards = Math.abs(random.nextInt(cards.size()));
                 player.getPlayerCardsDeck().add(cards.get(randomIndexForCards));
+                System.out.println(player.getPlayerCardsDeck().toString());
+                GameMenuController.setPlayerDeck(player, cards.get(randomIndexForCards));
             } else {
                 int randomIndexForSpecialCards = Math.abs(random.nextInt(specialCards.size()));
                 player.getPlayerSpecialCardsDeck().add(specialCards.get(randomIndexForSpecialCards));
+                GameMenuController.setPlayerSpecialDeck(player, specialCards.get(randomIndexForSpecialCards));
             }
         }
     }

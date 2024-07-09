@@ -18,12 +18,10 @@ public class gameHistory {
 
     @Override
     public String toString() {
-        return "{" +
-                "opponentName='" + opponentName + '\'' +
-                ", opponentLevel=" + opponentLevel + '\'' +
-                ", gameState='" + gameState+
-                ", gameDate=" + gameDate +
-                '}';
+        return "opponentName='" + opponentName + '\'' +
+                " opponentLevel=" + opponentLevel + "\n" +
+                " gameState='" + gameState+"\'"+
+                " gameDate=" + gameDate ;
     }
 
     public String getOpponentName() {
