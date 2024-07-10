@@ -10,12 +10,12 @@
 .hbox, .flowpane {
     -fx-spacing: 10;
     -fx-padding: 10; /* Adds padding inside the HBox or FlowPane */
-    -fx-background-color: #333333; /* Dark grey background, adjust as needed */
+    -fx-background-color:  #2C3E50; /* Dark grey background, adjust as needed */
 }
 
 .scroll-pane {
-    -fx-background: black;
-    -fx-background-color: black;
+    -fx-background:  #2C3E50;
+    -fx-background-color:  #2C3E50;
 }
 
 .button {

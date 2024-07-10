@@ -84,7 +84,7 @@ public class timeLineController {
         });
 
         line = new Rectangle(5, 165);
-        line.setFill(Color.RED);
+        line.setFill(Color.rgb(194,98,35));
         line.setX(0);
         line.setY(170);
         Base.getChildren().add(line);
@@ -266,7 +266,7 @@ public class timeLineController {
                 timeLineMenu.Output("HP", playerOne.getUsername(), String.valueOf(playerOne.getHP()),
                         playerTwo.getUsername(), String.valueOf(playerTwo.getHP()));
                 timeLineMenu.Output("cards", "Heal", card.getName());
-            } else {
+            }else {
                 String specialCard = "specialCards";
                 String card = "cards";
                 String cardOne;

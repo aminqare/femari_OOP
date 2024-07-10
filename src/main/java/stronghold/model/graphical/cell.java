@@ -37,8 +37,8 @@ public class cell extends Rectangle {
             if(gameBoard.getType().get(i).equals("specialCards")){
                 String specialCardName = gameBoard.getBoard().get(i);
                 specialCards specialCard = specialCards.GetSpecialCardByName(player.getPlayerSpecialCardsDeck(), specialCardName);
-                Image image = new Image(graphicalCards.class.getResource("/images/" + "specialCards" + "/" + specialCardName + ".png").toExternalForm(), 50, 80, false, true);
-                player.getCells().get(i).setFill(new ImagePattern(image, 0, 0, 50, 80, false));
+                    Image image = new Image(graphicalCards.class.getResource("/images/" + "specialCards" + "/" + specialCardName + ".png").toExternalForm(), 50, 80, false, true);
+                    player.getCells().get(i).setFill(new ImagePattern(image, 0, 0, 50, 80, false));
             }
             else if(gameBoard.getType().get(i).equals("cards")){
                 System.out.println("hello");

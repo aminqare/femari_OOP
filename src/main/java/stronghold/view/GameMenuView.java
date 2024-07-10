@@ -255,7 +255,7 @@ if(currentSuperGame.getCurrentGame().getPlayerOne().getRounds() == 0 && currentS
 
     public static ArrayList<Integer> intract(cards playedCard, Player enemy, int BlockIndex) {
         ArrayList<Integer> Temp = new ArrayList<>();
-        for (int i = BlockIndex; i < BlockIndex + playedCard.getDuration()+1; i++) {
+        for (int i = BlockIndex; i < BlockIndex + playedCard.getDuration(); i++) {
             if (enemy.getGameBoard().getType().get(i).equals("cards")) {
                 Temp.add(i);
             }

@@ -128,7 +128,9 @@ public class battleSpecialCardsInfoController {
                     player.getPlayerSpecialCardsDeck().remove(selectedSpecialCard);
                     player.getSpecialCardsCell().remove(cell);
                     player.setRounds(player.getRounds() - 1);
-                    player.getGameBoard().getBoard().set(numberBlock - 1, selectedSpecialCard.getName());
+                    for(int i=numberBlock-1;i<numberBlock+selectedSpecialCard.getDuration()-1;i++) {
+                        player.getGameBoard().getBoard().set(i, selectedSpecialCard.getName());
+                    }
                     openMessageDialog("Card placed successfully!");
                     switchTurns(currentSuperGame.getCurrentGame());
 
