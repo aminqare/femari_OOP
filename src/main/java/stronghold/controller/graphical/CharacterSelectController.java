@@ -22,6 +22,7 @@ import static stronghold.controller.graphical.GameMenuController.chooseCharacter
 public class CharacterSelectController {
     public TextField firstPlayerCharacter;
     public TextField secondPlayerCharacter;
+
     public Button DoneButton;
     static Stage stage;
 
@@ -54,7 +55,7 @@ public class CharacterSelectController {
         String secondChar = secondPlayerCharacter.getText();
         if (firstChar.isEmpty() || secondChar.isEmpty()) {
             openErrorDialog("Error!: Please select your Characters first");
-            return; // اضافه کردن این خط تا اجرای کد ادامه نداشته باشد
+            return;
         }
 
         GameMenuController.setCharacterOne(firstChar);
@@ -71,11 +72,9 @@ public class CharacterSelectController {
 
         // چک کردن مقدار null
         if (currentSuperGame.getCurrentGame() == null) {
-            openErrorDialog("Error: Current game is null.");
+            System.out.println("Error: Current game is null.");
             return; // اضافه کردن این خط تا اجرای کد ادامه نداشته باشد
         }
-
-        FirstTurn(game);
 
         PauseTransition delay = new PauseTransition(Duration.millis(30));
         delay.setOnFinished(event -> {
@@ -86,29 +85,17 @@ public class CharacterSelectController {
 
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
+                GameMenuController.setStage(stage);
                 stage.show();
-            } catch (IOException ignored) {
-                openErrorDialog("Error: Unable to load the game menu.");
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println("Error: Unable to load the game menu.");
             }
         });
         delay.play();
     }
 
-    public static void FirstTurn(Game game) {
-        System.out.println("working well");
-        Double random = game.getRandom().nextDouble();
-        if (random < 0.7) {
-            game.getPlayerOne().setTurn(true);
-            game.getPlayerTwo().setTurn(false);
-            game.getPlayerOne().setFirstPlayer(true);
-            openMessageDialog("Player one's turn");
-        } else {
-            game.getPlayerOne().setTurn(false);
-            game.getPlayerTwo().setTurn(true);
-            game.getPlayerTwo().setFirstPlayer(true);
-            openMessageDialog("Player two's turn");
-        }
-    }
+
 
     public static void openMessageDialog(String message) {
         Dialog<String> dialog = new Dialog<>();

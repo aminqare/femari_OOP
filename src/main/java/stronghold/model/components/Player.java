@@ -1,6 +1,5 @@
 package stronghold.model.components;
 
-import javafx.scene.Group;
 import stronghold.model.cards.cards;
 import stronghold.model.graphical.cell;
 import stronghold.model.specialCards.specialCards;

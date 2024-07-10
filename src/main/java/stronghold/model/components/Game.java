@@ -35,8 +35,11 @@ public class Game {
 
     public Game(superGame superGame) {
         this.superGame=superGame;
+
         this.playerOne = superGame.getPlayerOne();
         this.playerTwo = superGame.getPlayerTwo();
+        playerOne.setRounds(2);
+        playerTwo.setRounds(2);
         this.playerOne.setGameBoard(new gameBoard());
         this.playerTwo.setGameBoard(new gameBoard());
         this.playerOne.setPlayerCardsDeck(new ArrayList<>());

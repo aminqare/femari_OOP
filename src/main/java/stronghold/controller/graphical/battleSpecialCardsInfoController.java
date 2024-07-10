@@ -107,6 +107,7 @@ public class battleSpecialCardsInfoController {
     public void placeCard(MouseEvent mouseEvent) {
         Player player = currentSuperGame.getCurrentGame().getCurrentPlayer();
         Player enemyPlayer = currentSuperGame.getCurrentGame().getCurrentEnemy();
+        System.out.println(player.getUser().getUsername());
         String text = BlockIndex.getText();
         int numberBlock = Integer.parseInt(text);
             specialCards selectedSpecialCard = specialCards.GetSpecialCardByName(player.getUser().getPlayerSpecialCards(), cell.getName());
@@ -127,6 +128,7 @@ public class battleSpecialCardsInfoController {
                     player.getPlayerSpecialCardsDeck().remove(selectedSpecialCard);
                     player.getSpecialCardsCell().remove(cell);
                     player.setRounds(player.getRounds() - 1);
+                    player.getGameBoard().getBoard().set(numberBlock - 1, selectedSpecialCard.getName());
                     openMessageDialog("Card placed successfully!");
                     switchTurns(currentSuperGame.getCurrentGame());
 

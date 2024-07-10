@@ -1,9 +1,11 @@
 package stronghold.controller.graphical;
 
+import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -16,6 +18,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import stronghold.model.UsersDB;
 import stronghold.model.cards.cards;
 import stronghold.model.components.Game;
@@ -58,6 +61,8 @@ public class GameMenuController {
     public ImageView player1Image;
     public Label player1Name;
     public ProgressBar player1HP;
+    public Label player2HPNum;
+    public Label player1HPNum;
 
     public HBox getSpecialCardsBarTwo() {
         return specialCardsBarTwo;
@@ -108,10 +113,10 @@ public class GameMenuController {
     }
 
     @FXML
-    public GridPane upperGround;
+    private GridPane upperGround;
 
     @FXML
-    public GridPane lowerGround;
+    private GridPane lowerGround;
 
     @FXML
     public void initialize() {
@@ -119,11 +124,13 @@ public class GameMenuController {
             System.out.println("One of the necessary objects is null");
             return;
         }
-
+        FirstTurn(game);
         playerOne.getGameBoard().UpdateType();
         playerTwo.getGameBoard().UpdateType();
         updateDeck();
+
         addCellsToGround(upperGround, playerTwo);
+        System.out.println("Adding cells to lowerGround");
         addCellsToGround(lowerGround, playerOne);
         URL url = getClass().getResource("/images/" + characterTwo + ".jpeg");
         if (url == null) {
@@ -134,8 +141,10 @@ public class GameMenuController {
         Platform.runLater(() -> {
             setPlayer2(playerTwo.getUsername(), new Image(String.valueOf(getClass().getResource("/images/" + characterTwo + ".jpeg"))), 100);
             setPlayer1(playerOne.getUsername(), new Image(String.valueOf(getClass().getResource("/images/" + characterOne + ".jpeg"))), 100);
-            setPlayerHP(player1HP, 100);
-            setPlayerHP(player2HP, 100);
+            player2HPNum.setText(String.valueOf(playerTwo.getHP()));
+            player1HPNum.setText(String.valueOf(playerOne.getHP()));
+            setPlayerHP(player1HP, playerOne.getHP());
+            setPlayerHP(player2HP, playerTwo.getHP());
         });
 
     }
@@ -226,6 +235,8 @@ public class GameMenuController {
         superGame = SuperGame;
     }
 
+
+
     public static Player chooseCharacter(String character, User currentUser) {
         if (character == null || currentUser == null) {
             System.out.println("Character or currentUser is null");
@@ -290,19 +301,21 @@ public class GameMenuController {
         enemy.setTurn(true);
         GameMenuController.openMessageDialog(enemy.getUsername() + "'s turn");
     }
-    public static void openMessageDialog(String error) {
-        Dialog<String> dialog = new Dialog<String>();
-        dialog.setTitle("Message");
-        Label label = new Label(error);
-        dialog.setContentText(label.getText());
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
-        dialog.getDialogPane().getChildren().add(label);
-        ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().add(type);
-        Node closeButton = dialog.getDialogPane().lookupButton(ButtonType.CLOSE);
-        closeButton.managedProperty().bind(closeButton.visibleProperty());
-        closeButton.setVisible(false);
-        dialog.showAndWait();
+    public static void openMessageDialog(String message) {
+        Platform.runLater(() -> {
+            Dialog<String> dialog = new Dialog<>();
+            dialog.setTitle("Message");
+            Label label = new Label(message);
+            dialog.setContentText(label.getText());
+            dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+            dialog.getDialogPane().getChildren().add(label);
+            ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+            dialog.getDialogPane().getButtonTypes().add(type);
+            Node closeButton = dialog.getDialogPane().lookupButton(ButtonType.CLOSE);
+            closeButton.managedProperty().bind(closeButton.visibleProperty());
+            closeButton.setVisible(false);
+            dialog.showAndWait();
+        });
     }
 
     private void openSpecialCardInfo(cell cell, User user) {
@@ -357,31 +370,60 @@ public class GameMenuController {
         }
     }
     public void openErrorDialog(String error) {
-        Dialog<String> dialog = new Dialog<>();
-        dialog.setTitle("Error!");
-        Label label = new Label(error);
-        dialog.setContentText(label.getText());
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
-        dialog.getDialogPane().getChildren().add(label);
-        ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().add(type);
-        Node closeButton = dialog.getDialogPane().lookupButton(ButtonType.CLOSE);
-        closeButton.managedProperty().bind(closeButton.visibleProperty());
-        closeButton.setVisible(false);
-        dialog.showAndWait();
+        Platform.runLater(() -> {
+            Dialog<String> dialog = new Dialog<>();
+            dialog.setTitle("Error!");
+            Label label = new Label(error);
+            dialog.setContentText(label.getText());
+            dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+            dialog.getDialogPane().getChildren().add(label);
+            ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+            dialog.getDialogPane().getButtonTypes().add(type);
+            Node closeButton = dialog.getDialogPane().lookupButton(ButtonType.CLOSE);
+            closeButton.managedProperty().bind(closeButton.visibleProperty());
+            closeButton.setVisible(false);
+            dialog.showAndWait();
+        });
     }
     public void checkRounds() {
         if (playerOne.getRounds() == 0 && playerTwo.getRounds() == 0) {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/timeLine.fxml"));
-                AnchorPane root = loader.load();
-                Scene scene = new Scene(root);
-                Stage timelineStage = new Stage();
-                timelineStage.setScene(scene);
-                timelineStage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            timeLineController.setCurrentSuperGame(superGame);
+            PauseTransition delay = new PauseTransition(Duration.millis(30));
+            delay.setOnFinished(event -> {
+                try {
+                    FXMLLoader loader = new FXMLLoader();
+                    loader.setLocation(getClass().getResource("/timeLine.fxml"));
+                    Parent root = loader.load();
+
+                    Scene scene = new Scene(root);
+//                URL url = getClass().getResource("/Styles.css");
+//                if (url == null) {
+//                    throw new RuntimeException("Unable to load style.css, make sure it exists in the resources directory.");
+//                }
+//                scene.getStylesheets().add(url.toExternalForm());
+                    stage.setScene(scene);
+                    timeLineController.setStage(stage);
+                    stage.show();
+                } catch (IOException ignored) {
+                    openErrorDialog("Error: Unable to load the time line.");
+                }
+            });
+            delay.play();
+        }
+    }
+    public static void FirstTurn(Game game) {
+        System.out.println("working well");
+        Double random = game.getRandom().nextDouble();
+        if (random < 0.7) {
+            game.getPlayerOne().setTurn(true);
+            game.getPlayerTwo().setTurn(false);
+            game.getPlayerOne().setFirstPlayer(true);
+            openMessageDialog("Player one's turn");
+        } else {
+            game.getPlayerOne().setTurn(false);
+            game.getPlayerTwo().setTurn(true);
+            game.getPlayerTwo().setFirstPlayer(true);
+            openMessageDialog("Player two's turn");
         }
     }
 }
