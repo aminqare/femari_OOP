@@ -254,6 +254,7 @@ public class battleCardInfoController {
             player.setRounds(player.getRounds() - 1);
             player.getGameBoard().getBoard().set(numberBlock - 1, selectedCard.getName());
             openMessageDialog("Card placed successfully!");
+            System.out.println(player.getGameBoard().getBoard().toString());
             switchTurns(currentSuperGame.getCurrentGame());
 
         }

@@ -41,6 +41,7 @@ public class cell extends Rectangle {
                 player.getCells().get(i).setFill(new ImagePattern(image, 0, 0, 50, 80, false));
             }
             else if(gameBoard.getType().get(i).equals("cards")){
+                System.out.println("hello");
                 String cardName = gameBoard.getBoard().get(i);
                 Image image = new Image(graphicalCards.class.getResource("/images/" + "cards" + "/" + cardName + ".png").toExternalForm(), 50, 80, false, true);
                 player.getCells().get(i).setFill(new ImagePattern(image, 0, 0, 50, 80, false));

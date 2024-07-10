@@ -188,6 +188,8 @@ public class timeLineController {
             playerOne.getPlayerCardsDeck().clear();
             playerTwo.getCardsCell().clear();
             playerTwo.getPlayerCardsDeck().clear();
+            playerOne.getCells().clear();
+            playerTwo.getCells().clear();
             Game game = new Game(currentSuperGame);
             currentSuperGame.setCurrentGame(game);
             GameMenuController.setPlayerOne(playerOne);
@@ -218,7 +220,7 @@ public class timeLineController {
         } else if ((line.getX() - 60) % 55 == 0) {
             Player playerOne = currentSuperGame.getPlayerOne();
             Player playerTwo = currentSuperGame.getPlayerTwo();
-            System.out.println("kirr");
+            //System.out.println("kirr");
             if (currentSuperGame.getCurrentGame().getPlayerOne().getGameBoard().getType().get(index - 1).equals("cards") && ISnull(currentSuperGame.getCurrentGame().getPlayerTwo().getGameBoard().getType().get(index - 1))) {
                 cards card = cards.GetCardByName(playerOne.getPlayerCards(),
                         currentSuperGame.getCurrentGame().getPlayerOne().getGameBoard().getBoard().get(index - 1));
