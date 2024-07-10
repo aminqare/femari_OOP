@@ -88,7 +88,7 @@ public class Player extends User{
     public Player(User user, String character) {
         super(user.getUsername(), user.getPassword(), user.getNickname(), user.getEmail(), user.getPasswordRecoveryQuestion(), user.getPasswordRecoveryAnswer());
         this.damage = 0;
-        this.HP = 20;
+        this.HP = 100;
         this.character = character;
         this.rounds = 2;
         this.user = user;
