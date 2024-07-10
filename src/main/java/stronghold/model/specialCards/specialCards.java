@@ -26,14 +26,14 @@ public abstract class specialCards implements Serializable {
     private static ArrayList<specialCards> gameSpecialCards = new ArrayList<>(){{
         add(new shield()) ;
         add(new roundDefuser()) ;
-        //add(new powerade());
+        add(new powerade());
         add(new powerade());
         add(new oppsCardDefuser());
         add(new mole());
-        //add(new mehradHidden());
+        add(new mehradHidden());
         add(new heal());
         //add(new copyCat());
-        //add(new cardSnatcher());
+        add(new cardSnatcher());
         add(new builder());
     }};
     public static specialCards GetSpecialCardByName(List<specialCards> cards, String name){

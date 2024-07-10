@@ -63,6 +63,11 @@ public class GameMenuController {
     public ProgressBar player1HP;
     public Label player2HPNum;
     public Label player1HPNum;
+    public static boolean bet;
+
+    public static void setBet(boolean bet) {
+        GameMenuController.bet = bet;
+    }
 
     public HBox getSpecialCardsBarTwo() {
         return specialCardsBarTwo;

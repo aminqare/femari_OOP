@@ -15,6 +15,8 @@ public class AdminMenuController {
         add("mole");
         add("heal");
         add("builder");
+        add("mehradHidden");
+        add("cardSnatcher");
     }};
 
     public static boolean nameExists(String name){

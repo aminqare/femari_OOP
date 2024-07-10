@@ -33,6 +33,7 @@ public class HubMenuController {
     private static User currentUser;
     public Button shopMenu;
     public Button gameHistory;
+    public static Stage stage;
 
     public static User getCurrentUser() {
         return currentUser;
@@ -47,6 +48,10 @@ public class HubMenuController {
     Button logOutButton, profileMenuButton;
     @FXML
     Label usernameLabel;
+
+    public static void setStage(Stage stage) {
+        HubMenuController.stage = stage;
+    }
 
     public void logOut() {
 
@@ -113,6 +118,7 @@ public class HubMenuController {
             throw new RuntimeException("Unable to load style.css, make sure it exists in the resources directory.");
         }
         currentScene.getStylesheets().add(url.toExternalForm());
+        LobbyController.setSecondStage(stage);
         primaryStage.setScene(currentScene);
         primaryStage.show();
     }

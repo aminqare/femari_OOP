@@ -38,8 +38,8 @@ public class Game {
 
         this.playerOne = superGame.getPlayerOne();
         this.playerTwo = superGame.getPlayerTwo();
-        playerOne.setRounds(2);
-        playerTwo.setRounds(2);
+        playerOne.setRounds(4);
+        playerTwo.setRounds(4);
         this.playerOne.setGameBoard(new gameBoard());
         this.playerTwo.setGameBoard(new gameBoard());
         this.playerOne.setPlayerCardsDeck(new ArrayList<>());

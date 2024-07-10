@@ -5,6 +5,7 @@ import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
@@ -57,6 +58,11 @@ public class LobbyController {
     @FXML
     Pane games;
     public static Stage stage;
+    public static Stage secondStage;
+
+    public static void setSecondStage(Stage secondStage) {
+        LobbyController.secondStage = secondStage;
+    }
 
     public static void setStage(Stage stage) {
         LobbyController.stage = stage;
@@ -72,6 +78,7 @@ public class LobbyController {
         secondPlayerController.setUser(currentUser);
         Thread.sleep(200);
         stage.close();
+        secondStage.close();
         Stage primaryStage = new Stage();
         Pane root;
         LobbyController.setStage(primaryStage);
@@ -87,10 +94,15 @@ public class LobbyController {
     }
     @FXML
     public void bettingModeStart() throws IOException, InterruptedException {
+        if(currentUser.getGold() < 50){
+            openErrorDialog("you don't have enough gold for this mode");
+        }
+        else{
         isBetting = true;
         secondPlayerController.setUser(currentUser);
         Thread.sleep(200);
         stage.close();
+        secondStage.close();
         Stage primaryStage = new Stage();
         Pane root;
         LobbyController.setStage(primaryStage);
@@ -103,5 +115,20 @@ public class LobbyController {
         currentScene.getStylesheets().add(url.toExternalForm());
         primaryStage.setScene(currentScene);
         primaryStage.show();
+        }
+    }
+    public void openErrorDialog(String error) {
+        Dialog<String> dialog = new Dialog<>();
+        dialog.setTitle("Error!");
+        Label label = new Label(error);
+        dialog.setContentText(label.getText());
+        dialog.getDialogPane().getButtonTypes().add(ButtonType.CLOSE);
+        dialog.getDialogPane().getChildren().add(label);
+        ButtonType type = new ButtonType("Ok", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(type);
+        Node closeButton = dialog.getDialogPane().lookupButton(ButtonType.CLOSE);
+        closeButton.managedProperty().bind(closeButton.visibleProperty());
+        closeButton.setVisible(false);
+        dialog.showAndWait();
     }
 }

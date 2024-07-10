@@ -132,7 +132,12 @@ public class secondPlayerController {
                 openMessageDialog("Congrats!\nstart pack is given to " + secondUser.getUsername());
 
             }
-
+            if(LobbyController.isBetting){
+            GameMenuController.setBet(true);
+            }
+            else if(!LobbyController.isBetting){
+                GameMenuController.setBet(false);
+            }
             PauseTransition delay = new PauseTransition(Duration.millis(30));
             Platform.runLater(() -> {
                 Pane root = null;

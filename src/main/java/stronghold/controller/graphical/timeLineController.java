@@ -166,6 +166,7 @@ public class timeLineController {
                     Parent root = loader.load();
                     Scene scene = new Scene(root);
                     stage.setScene(scene);
+                    endGameController.setStage(stage);
                     GameMenuController.setStage(stage);
                     stage.show();
                 } catch (IOException ignored) {

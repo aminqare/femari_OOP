@@ -201,6 +201,7 @@ public class LoginController {
 
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) loginButton.getScene().getWindow();
+                HubMenuController.setStage(stage);
                 stage.setScene(scene);
                 stage.show();
             });

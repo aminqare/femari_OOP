@@ -45,7 +45,7 @@ public class mainMenuController extends menuController{
         }
     }
     public static void addSpecialCards(Random random,ArrayList<String> names,User curentUser){
-        int randomIndex= Math.abs(random.nextInt(7));
+        int randomIndex= Math.abs(random.nextInt(9));
         String name= names.get(randomIndex);
         if(name.equals("shield")){
             curentUser.getPlayerSpecialCards().add(new shield());
@@ -58,18 +58,18 @@ public class mainMenuController extends menuController{
         }else if(name.equals("mole")){
             curentUser.getPlayerSpecialCards().add(new mole());
         }
-//        else if(name.equals("mehradHidden")){
-//            curentUser.getPlayerSpecialCards().add(new mehradHidden());
-//        }
+        else if(name.equals("mehradHidden")){
+            curentUser.getPlayerSpecialCards().add(new mehradHidden());
+        }
         else if(name.equals("heal")){
             curentUser.getPlayerSpecialCards().add(new heal());
         }
 //        else if(name.equals("copyCat")){
 //            curentUser.getPlayerSpecialCards().add(new copyCat());
 //        }
-//        else if(name.equals("cardSnatcher")){
-//            curentUser.getPlayerSpecialCards().add(new cardSnatcher());
-//        }
+        else if(name.equals("cardSnatcher")){
+            curentUser.getPlayerSpecialCards().add(new cardSnatcher());
+        }
         else if(name.equals("builder")){
             curentUser.getPlayerSpecialCards().add(new builder());
         }

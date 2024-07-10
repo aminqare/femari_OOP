@@ -62,7 +62,7 @@ public class CharacterSelectController {
         GameMenuController.setCharacterTwo(secondChar);
         Player playerOne = chooseCharacter(firstChar, GameMenuController.user);
         Player playerTwo = chooseCharacter(secondChar, GameMenuController.secondUser);
-        superGame currentSuperGame = new superGame(playerOne, playerTwo, IsBetting);
+        superGame currentSuperGame = new superGame(playerOne, playerTwo, LobbyController.isBetting);
         Game game = new Game(currentSuperGame);
         currentSuperGame.setCurrentGame(game);
         GameMenuController.setPlayerOne(playerOne);
