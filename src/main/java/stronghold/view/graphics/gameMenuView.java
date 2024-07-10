@@ -15,7 +15,9 @@ public class gameMenuView extends Application {
         Stage newStage=new Stage();
         Pane root = FXMLLoader.load(getClass().getResource("/gameMenu.fmxl"));
         Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
         primaryStage.setScene(scene);
+
         primaryStage.show();
     }
 
